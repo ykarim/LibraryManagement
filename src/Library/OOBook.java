@@ -1,0 +1,133 @@
+package Library;
+
+import java.util.Date;
+
+public class OOBook {
+	private String title, author, publisher;
+	private int ID, publicationYear, gradeLevel, numAvailable; 
+	private Date dueDate;
+	
+	public OOBook(String title, String author, String publisher, int ID, int publicationYear, int gradeLevel, int numAvailable, Date dueDate){
+		this.title = title;
+		this.author = author; 
+		this.publisher = publisher;
+		this.ID = ID;
+		this.publicationYear = publicationYear;
+		this.gradeLevel = gradeLevel; 
+		this.numAvailable = numAvailable;
+		this.dueDate = dueDate;
+	}
+	
+	/**
+	 * @return the title
+	 */
+	public String getTitle() {
+		return title;
+	}
+	
+	/**
+	 * @param title the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	/**
+	 * @return the author
+	 */
+	public String getAuthor() {
+		return author;
+	}
+	
+	/**
+	 * @param author the author to set
+	 */
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	
+	/**
+	 * @return the publisher
+	 */
+	public String getPublisher() {
+		return publisher;
+	}
+	
+	/**
+	 * @param publisher the publisher to set
+	 */
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+	
+	/**
+	 * @return the iD
+	 */
+	public int getID() {
+		return ID;
+	}
+	
+	/**
+	 * @param iD the iD to set
+	 */
+	public void setID(int iD) {
+		ID = iD;
+	}
+	
+	/**
+	 * @return the publicationYear
+	 */
+	public int getPublicationYear() {
+		return publicationYear;
+	}
+	
+	/**
+	 * @param publicationYear the publicationYear to set
+	 */
+	public void setPublicationYear(int publicationYear) {
+		this.publicationYear = publicationYear;
+	}
+	
+	/**
+	 * @return the gradeLevel
+	 */
+	public int getGradeLevel() {
+		return gradeLevel;
+	}
+	
+	/**
+	 * @param gradeLevel the gradeLevel to set
+	 */
+	public void setGradeLevel(int gradeLevel) {
+		this.gradeLevel = gradeLevel;
+	}
+	
+	/**
+	 * @return the numAvailable
+	 */
+	public int getNumAvailable() {
+		return numAvailable;
+	}
+	
+	/**
+	 * @param numAvailable the numAvailable to set
+	 */
+	public void setNumAvailable(int numAvailable) {
+		this.numAvailable = numAvailable;
+	}
+	
+	/**
+	 * @return the dueDate
+	 */
+	public Date getDueDate() {
+		return dueDate;
+	}
+	
+	/**
+	 * @param dueDate the dueDate to set
+	 */
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
+	}
+		
+}

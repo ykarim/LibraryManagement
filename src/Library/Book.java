@@ -1,7 +1,5 @@
 package Library;
 
-
-//May be wrong dependency jars. Check server dependency folder on desktop for those jars. They seem useless.
 import java.util.ArrayList;
 public class Book {
 	public static ArrayList<String>searchAuthor=new ArrayList<String>();
