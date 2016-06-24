@@ -7,7 +7,7 @@ public class OOUser {
 	private int age, balance, id;
 	private long cardNumber;
 	private String firstName, lastName, username, password;
-	private ArrayList<String> checkouts, reserves;
+	private ArrayList<OOBook> checkouts, reserves = new ArrayList<OOBook>();
 	
 	/**
 	 * @return the age
@@ -122,31 +122,60 @@ public class OOUser {
 	}
 	
 	/**
+	 * 
 	 * @return the checkouts
 	 */
-	public ArrayList<String> getCheckouts() {
+	public ArrayList<OOBook> getCheckouts(){
 		return checkouts;
 	}
 	
 	/**
+	 * 
+	 * @return the reserves
+	 */
+	public ArrayList<OOBook> getReserves(){
+		return reserves;
+	}
+	
+	/**
+	 * Takes in Book and adds it to user's checkouts arraylist. 
+	 * Prev: Used to be setCheckouts and set arraylist checkouts
 	 * @param checkouts the checkouts to set
 	 */
-	public void setCheckouts(ArrayList<String> checkouts) {
-		this.checkouts = checkouts;
+	public void addCheckout(OOBook book) {
+		checkouts.add(book);
+		//Add to number of books available once returned. Subtract from num when taken out. 
 	}
+	
+	/**
+	 * Returns book and removes it from list of checkouts.
+	 * @param book
+	 */
+	public void removeCheckout(OOBook book){
+		checkouts.remove(book);
+	}
+	
+	/**
+	 * Clears the checkout list
+	 */
+	public void clearCheckouts(){
+		checkouts.clear();
+	}
+	//add method to clear checkouts
 	
 	/**
 	 * @return the reserves
 	 */
-	public ArrayList<String> getReserves() {
-		return reserves;
+	public void addReserve(OOBook book) {
+		reserves.add(book);
+		//maybe alsos ubtract from num available
 	}
 	
 	/**
 	 * @param reserves the reserves to set
 	 */
-	public void setReserves(ArrayList<String> reserves) {
-		this.reserves = reserves;
+	public void removeReserve(OOBook book) {
+		reserves.remove(book);
 	}
 	
 	

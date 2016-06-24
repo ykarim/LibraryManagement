@@ -7,6 +7,18 @@ public class OOBook {
 	private int ID, publicationYear, gradeLevel, numAvailable; 
 	private Date dueDate;
 	
+	/**
+	 * Creates a new book with the following attributes. 
+	 * Required parameters may not be left null. 
+	 * @param title             REQUIRED
+	 * @param author            
+	 * @param publisher 
+	 * @param ID                REQUIRED
+	 * @param publicationYear
+	 * @param gradeLevel
+	 * @param numAvailable      REQUIRED
+	 * @param dueDate
+	 */
 	public OOBook(String title, String author, String publisher, int ID, int publicationYear, int gradeLevel, int numAvailable, Date dueDate){
 		this.title = title;
 		this.author = author; 
