@@ -3,8 +3,8 @@ package Library;
 import java.util.ArrayList;
 import java.util.Date;
 
-//Have Arraylist of books and users and admins. Maybe use this as a manager class
 public class OOLibrary {
+	
 	private ArrayList<OOBook> books = new ArrayList<OOBook>();
 	private ArrayList<OOUser> users = new ArrayList<OOUser>();
 	private ArrayList<OOAdmin> admins = new ArrayList<OOAdmin>();
@@ -14,6 +14,21 @@ public class OOLibrary {
 	 */
 	public ArrayList<OOBook> getBooks() {
 		return books;
+	}
+	
+	/**
+	 * Return the book that has given parameters
+	 * @param book
+	 * @return OOBook
+	 */
+	public OOBook getBook(OOBook book){
+		for (int count = 0; count <= books.size(); count++){
+			if (books.get(count).getBytes() == book.getBytes()){
+				return book;
+			}
+		}
+		
+		return null;
 	}
 
 	/**
@@ -28,6 +43,20 @@ public class OOLibrary {
 	 */
 	public ArrayList<OOUser> getUsers() {
 		return users;
+	}
+	
+	/**
+	 * Return a user that has given parameters
+	 * @param user
+	 * @return OOUser
+	 */
+	public OOUser getUser(OOUser user){
+		for (int count = 0; count <= users.size(); count++){
+			return null;
+			//Do the same for admin
+		}
+		
+		return null;
 	}
 
 	/**
@@ -69,7 +98,7 @@ public class OOLibrary {
 	
 	public void addUser(OOUser user){
 		if (users.contains(user)) {
-			
+			//do something
 		}else{
 			users.add(user);
 		}
@@ -79,13 +108,13 @@ public class OOLibrary {
 		if (users.contains(user)) {
 			users.remove(user);
 		} else {
-			
+			//do something
 		}
 	}
 	
 	public void addAdmin(OOAdmin admin){
 		if(admins.contains(admin)){
-			
+			//do something
 		} else {
 			admins.add(admin);
 		}
@@ -109,13 +138,21 @@ public class OOLibrary {
 	 */
 	public void borrowBook(OOBook book, OOUser user, int count, Date dueDate){
 		while (count > 0) {              //Maybe switch to for loop whichever is more efficient
-			OOBook newBook = book;
+			OOBorrowedBook newBook = new OOBorrowedBook(book);
 			newBook.setDueDate(dueDate);
 			user.addCheckout(newBook);
 			count--;
 		}
 	}
 	
+	public void returnBook(OOBorrowedBook book, OOUser user, int count){
+		while (count>0) {
+			//Check for late fee. Let user save charge.
+			count--;
+		}
+	}
+	
+
 	/**
 	 * Checks if book is available and returns bool
 	 * @param book
