@@ -7,7 +7,8 @@ public class OOUser {
 	private int age, balance, id;
 	private long cardNumber;
 	private String firstName, lastName, username, password;
-	private ArrayList<OOBook> checkouts, reserves = new ArrayList<OOBook>();
+	private ArrayList<OOBorrowedBook> checkouts = new ArrayList<OOBorrowedBook>();
+	private ArrayList<OOBook> reserves = new ArrayList<OOBook>();
 	
 	/**
 	 * @return the age
@@ -125,7 +126,7 @@ public class OOUser {
 	 * 
 	 * @return the checkouts
 	 */
-	public ArrayList<OOBook> getCheckouts(){
+	public ArrayList<OOBorrowedBook> getCheckouts(){
 		return checkouts;
 	}
 	
@@ -138,11 +139,12 @@ public class OOUser {
 	}
 	
 	/**
-	 * Takes in Book and adds it to user's checkouts arraylist. 
+	 * Takes in BorrowedBook and adds it to user's checkouts arraylist. 
+	 * Check if borrowed book has dueDate assigned.
 	 * Prev: Used to be setCheckouts and set arraylist checkouts
 	 * @param checkouts the checkouts to set
 	 */
-	public void addCheckout(OOBook book) {
+	public void addCheckout(OOBorrowedBook book) {
 		checkouts.add(book);
 		//Add to number of books available once returned. Subtract from num when taken out. 
 	}
@@ -151,7 +153,7 @@ public class OOUser {
 	 * Returns book and removes it from list of checkouts.
 	 * @param book
 	 */
-	public void removeCheckout(OOBook book){
+	public void removeCheckout(OOBorrowedBook book){
 		checkouts.remove(book);
 	}
 	

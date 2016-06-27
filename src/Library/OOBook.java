@@ -1,11 +1,10 @@
 package Library;
 
-import java.util.Date;
 
 public class OOBook {
+	
 	private String title, author, publisher;
 	private int ID, publicationYear, gradeLevel, numAvailable; 
-	private Date dueDate;
 	
 	/**
 	 * Creates a new book with the following attributes. 
@@ -19,7 +18,7 @@ public class OOBook {
 	 * @param numAvailable      REQUIRED
 	 * @param dueDate
 	 */
-	public OOBook(String title, String author, String publisher, int ID, int publicationYear, int gradeLevel, int numAvailable, Date dueDate){
+	public OOBook(String title, String author, String publisher, int ID, int publicationYear, int gradeLevel, int numAvailable){
 		this.title = title;
 		this.author = author; 
 		this.publisher = publisher;
@@ -27,7 +26,21 @@ public class OOBook {
 		this.publicationYear = publicationYear;
 		this.gradeLevel = gradeLevel; 
 		this.numAvailable = numAvailable;
-		this.dueDate = dueDate;
+	}
+	
+	/**
+	 * Instantiates a book given a book's parameters
+	 * Use Cases: 
+	 * @param book
+	 */
+	public OOBook(OOBook book){
+		this.title = book.title;
+		this.author = book.author; 
+		this.publisher = book.publisher;
+		this.ID = book.ID;
+		this.publicationYear = book.publicationYear;
+		this.gradeLevel = book.gradeLevel; 
+		this.numAvailable = book.numAvailable;
 	}
 	
 	/**
@@ -129,17 +142,15 @@ public class OOBook {
 	}
 	
 	/**
-	 * @return the dueDate
+	 * Give a byte array including all of book's properties. 
+	 * <br>
+	 * Separator : </sep/>
+	 * @return
 	 */
-	public Date getDueDate() {
-		return dueDate;
-	}
-	
-	/**
-	 * @param dueDate the dueDate to set
-	 */
-	public void setDueDate(Date dueDate) {
-		this.dueDate = dueDate;
+	public byte[] getBytes(){
+		String sep = "</sep/>";
+		return (this.title + sep).getBytes();
+		
 	}
 		
 }
