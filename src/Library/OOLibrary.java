@@ -18,6 +18,7 @@ public class OOLibrary {
 	
 	/**
 	 * Return the book that has given parameters
+	 * If book not found, returns null
 	 * @param book
 	 * @return OOBook
 	 */
@@ -47,15 +48,16 @@ public class OOLibrary {
 	
 	/**
 	 * Return a user that has given parameters
+	 * If user not found, returns null
 	 * @param user
 	 * @return OOUser
 	 */
 	public OOUser getUser(OOUser user){
 		for (int count = 0; count <= users.size(); count++){
-			return null;
-			//Do the same for admin
+			if (users.get(count).getBytes() == user.getBytes()){
+				return user;
+			};
 		}
-		
 		return null;
 	}
 
@@ -72,7 +74,22 @@ public class OOLibrary {
 	public ArrayList<OOAdmin> getAdmins() {
 		return admins;
 	}
-
+	
+	/**
+	 * Return a admin that has given parameters
+	 * If admin not found, returns null
+	 * @param user
+	 * @return OOUser
+	 */
+	public OOAdmin getAdmin(OOAdmin admin){
+		for (int count = 0; count <= users.size(); count++){
+			if (admins.get(count).getBytes() == admin.getBytes()){
+				return admin;
+			};
+		}
+		return null;
+	}
+	
 	/**
 	 * @param admins the admins to set
 	 */
