@@ -180,5 +180,29 @@ public class OOUser {
 		reserves.remove(book);
 	}
 	
+	/**
+	 * Return all of user's properties as one string
+	 * Separator between props: "</sep/>
+	 * Order: First Name, Last Name, Username, Password, ID, Card Number, Age, Balance, Checkouts, Reserves
+	 * Have a method to convert checkouts arr list to string. (Checkouts Arrlist) -> "Ch[Book1, Book2]" (String) 
+	 * @return
+	 * Used to be: public toString() but couldn't have it private.
+	 */
+	private String getString(){
+		String sep = "</sep/>";
+		return (this.getFirstName() + sep + this.getLastName() + sep + this.getUsername() + sep + this.getPassword()
+				+ sep + this.getId() + sep + this.getCardNumber() + sep + this.getAge() + sep + this.getBalance() + sep)
+				.toString();	
+	}
+	
+	/**
+	 * Give a byte array including all of user's properties. 
+	 * <br>
+	 * Separator : < /sep/ >
+	 * @return
+	 */
+	public byte[] getBytes(){
+		return (this.getString()).getBytes();
+	}
 	
 }

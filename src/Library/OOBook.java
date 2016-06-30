@@ -142,15 +142,25 @@ public class OOBook {
 	}
 	
 	/**
+	 * Return all of book's properties as one string
+	 * Separator between props: "</sep/>
+	 * Order: 
+	 * @return
+	 */
+	private String getString(){
+		String sep = "</sep/>";
+		return (this.getTitle() + sep + this.getAuthor() + sep + this.getPublisher() + sep + this.getPublicationYear() + sep + this.getID()
+				+ sep + this.getGradeLevel() + sep +  this.getNumAvailable()).toString();
+	}
+	
+	/**
 	 * Give a byte array including all of book's properties. 
 	 * <br>
 	 * Separator : </sep/>
 	 * @return
 	 */
 	public byte[] getBytes(){
-		String sep = "</sep/>";
-		return (this.title + sep).getBytes();
-		
+		return (this.getString()).getBytes();
 	}
 		
 }
