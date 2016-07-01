@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class OOLibrary {
-	
+	//Maybe a check existing method to check if id exists and another to check if firstname+ lastname exist
 	private ArrayList<OOBook> books = new ArrayList<OOBook>();
 	private ArrayList<OOUser> users = new ArrayList<OOUser>();
 	private ArrayList<OOAdmin> admins = new ArrayList<OOAdmin>();
@@ -169,7 +169,6 @@ public class OOLibrary {
 		}
 	}
 	
-
 	/**
 	 * Checks if book is available and returns bool
 	 * @param book
@@ -184,5 +183,34 @@ public class OOLibrary {
 		}
 		return false;
 	}
-
+	
+	public void sortBooks(){
+		ArrayList<String> bookTitles = new ArrayList<String>(); //Make a new arraylist of type string used to sort titles first
+		for (int count = 0; count <= books.size(); count++) {
+			bookTitles.set(count, books.get(count).getTitle()); //Fill bookTitles with titles in order
+		}
+		
+		java.util.Collections.sort(bookTitles , String.CASE_INSENSITIVE_ORDER);
+		ArrayList<OOBook> temp_books = new ArrayList<OOBook>();
+		for (int count = 0; count <= bookTitles.size(); count++) {
+			temp_books.set(count, searchBookByTitle(bookTitles.get(count)));
+		}
+		
+		books = temp_books;
+	}
+	 /**
+	  * Searches for a given book by its title
+	  * @param title
+	  * @return Book with given title if found or else null
+	  * Prevents books from having the same title. Not good practice.
+	  */
+	//Make it so that you could search by property instead of just title
+	public OOBook searchBookByTitle(String title){
+		for (int count = 0; count <= books.size(); count++){
+			if (books.get(count).getTitle().compareToIgnoreCase(title.trim()) == 0){
+				return books.get(count);
+			}
+		}
+		return null;
+	}
 }
