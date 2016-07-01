@@ -185,6 +185,22 @@ public class OOLibrary {
 	}
 	
 	public void sortBooks(){
+		for (int num = 0; num <= books.size(); num++){
+			if (books.get(num).getTitle().compareToIgnoreCase(books.get(num + 1).getTitle()) > 0){  //Book 1 is supposed to be after book 2
+				//Swap
+				OOBook temp = books.get(num + 1);
+				books.set(num + 1, books.get(num));
+				books.set(num, temp);
+			}
+		}
+	}
+	
+	/**
+	 * Sorts books by title
+	 * Prevents books from having the same title
+	 * @deprecated
+	 */
+	public void sortBookArray(){
 		ArrayList<String> bookTitles = new ArrayList<String>(); //Make a new arraylist of type string used to sort titles first
 		for (int count = 0; count <= books.size(); count++) {
 			bookTitles.set(count, books.get(count).getTitle()); //Fill bookTitles with titles in order
@@ -198,6 +214,7 @@ public class OOLibrary {
 		
 		books = temp_books;
 	}
+	
 	 /**
 	  * Searches for a given book by its title
 	  * @param title
