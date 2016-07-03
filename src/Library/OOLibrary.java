@@ -26,9 +26,9 @@ public class OOLibrary {
 	 * @return OOBook
 	 */
 	public OOBook getBook(OOBook book){
-		for (int count = 0; count < books.size(); count++) {
+		for (OOBook b : books) {
 			if (/*books.get(count).getBytes() == book.getBytes()*/ /*books.get(count).getString().equals(book.getString().trim())*/ 
-					books.get(count).equals(book)){ 
+					b.equals(book)){ 
 				return book;
 			}
 		}
@@ -56,8 +56,8 @@ public class OOLibrary {
 	 * @return OOUser
 	 */
 	public OOUser getUser(OOUser user){
-		for (int count = 0; count < users.size(); count++){
-			if (users.get(count).equals(user)){
+		for (OOUser u : users){
+			if (u.equals(user)){
 				return user;
 			};
 		}
@@ -85,8 +85,8 @@ public class OOLibrary {
 	 * @return OOUser
 	 */
 	public OOAdmin getAdmin(OOAdmin admin){
-		for (int count = 0; count < admins.size(); count++){
-			if (admins.get(count).equals(admin)){
+		for (OOAdmin adm : admins){
+			if (adm.equals(admin)){
 				return admin;
 			};
 		}
@@ -199,7 +199,7 @@ public class OOLibrary {
 	 * @param dueDate
 	 */
 	public void borrowBook(OOBook book, OOUser user, int count, Date dueDate){
-		while (count > 0) {              //Maybe switch to for loop whichever is more efficient
+		while (count > 0) {              //Maybe switch to for loop whichever is more efficient. Or send a list of checkouts and loop thru
 			OOBorrowedBook newBook = new OOBorrowedBook(book);
 			newBook.setDueDate(dueDate);
 			getBook(book).setNumAvailable(getBook(book).getNumAvailable()-1); //Deducts from number of books currently available
