@@ -24,6 +24,18 @@ public enum BookProperties {
     public static BookProperties getProp(int num){
     	if(num == 0){
     		return Title;
+    	} else if(num == 1){
+    		return Author;
+    	} else if(num == 2){
+    		return Publisher;
+    	} else if(num==3){
+    		return PubYear;
+    	} else if(num==4){
+    		return ID;
+    	} else if(num == 5){
+    		return GradeLevel;
+    	} else if(num == 6){
+    		return NumAvailable;
     	} else {
     		return Invalid;
     	}
