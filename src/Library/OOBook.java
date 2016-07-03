@@ -1,5 +1,8 @@
 package Library;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class OOBook {
 	
@@ -16,7 +19,6 @@ public class OOBook {
 	 * @param publicationYear
 	 * @param gradeLevel
 	 * @param numAvailable      REQUIRED
-	 * @param dueDate
 	 */
 	public OOBook(String title, String author, String publisher, int ID, int publicationYear, int gradeLevel, int numAvailable){
 		this.title = title;
@@ -145,6 +147,7 @@ public class OOBook {
 	 * Return all of book's properties as one string
 	 * Separator between props: "</sep/>
 	 * Order: 
+	 * Private
 	 * @return
 	 */
 	private String getString(){
@@ -162,5 +165,67 @@ public class OOBook {
 	public byte[] getBytes(){
 		return (this.getString()).getBytes();
 	}
-		
+	
+	/**
+	 * Used to check if a book is equal to another book by checking their ID. 
+	 * Multiple copies of the same book have the same ID but may have different bookIDs.
+	 */
+	@Override
+	public int hashCode(){
+		return (getID());
+	}
+	
+	/**
+	 * Checks if a object(book) is the same as another by comparing ID's.
+	 * @param book
+	 * @return bool
+	 */
+	@Override
+	public boolean equals(Object obj){
+		if(obj instanceof OOBook){
+			if(obj.hashCode() == this.hashCode()){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return (super.equals(obj));
+		}
+	}
+	
+	/**
+	 * Given property (Ex: Author), gives the book's requested property value 
+	 * @param prop
+	 * @return Requested property value 
+	 */
+	public Object getProp(BookProperties prop){
+		if (prop == BookProperties.Author) {
+			return getAuthor();
+		} else if (prop == BookProperties.GradeLevel) {
+			return getGradeLevel();
+		} else if (prop == BookProperties.ID) {
+			return getID();
+		} else if (prop == BookProperties.NumAvailable){
+			return getNumAvailable();
+		} else if (prop == BookProperties.Publisher) {
+			return getPublisher();
+		} else if (prop == BookProperties.PubYear) {
+			return getPublicationYear();
+		} else if (prop == BookProperties.Title) {
+			return getTitle();
+		}
+ 		return null; 
+	}
+	
+	public Map<BookProperties, Object> getProps(){
+		Map<BookProperties, Object> prop = new HashMap<BookProperties, Object>();
+		prop.put(BookProperties.Author, getProp(BookProperties.Author));
+		prop.put(BookProperties.GradeLevel, getProp(BookProperties.GradeLevel));
+		prop.put(BookProperties.ID, getProp(BookProperties.ID));
+		prop.put(BookProperties.NumAvailable, getProp(BookProperties.NumAvailable));
+		prop.put(BookProperties.Publisher, getProp(BookProperties.Publisher));
+		prop.put(BookProperties.PubYear, getProp(BookProperties.PubYear));
+		prop.put(BookProperties.Title, getProp(BookProperties.Title));
+		return prop;
+	}
 }

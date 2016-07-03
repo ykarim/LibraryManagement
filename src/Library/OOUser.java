@@ -9,6 +9,29 @@ public class OOUser {
 	private String firstName, lastName, username, password;
 	private ArrayList<OOBorrowedBook> checkouts = new ArrayList<OOBorrowedBook>();
 	private ArrayList<OOBook> reserves = new ArrayList<OOBook>();
+	//Should i add reserves and checkouts what if its an import from file. have sep constructor for that. this one for new creation
+	//Have pw be 8-16 or user set num of charac.
+	/**
+	 * Creates a new user with the following attributes
+	 * All attribs cept age required
+	 * @param firstName 
+	 * @param lastName
+	 * @param username
+	 * @param password
+	 * @param age
+	 * @param id
+	 * @param cardNumber
+	 */
+	public OOUser(String firstName, String lastName, String username, String password,
+			      int age, int id, long cardNumber){
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+		this.age = age; 
+		this.id = id;
+		this.cardNumber = cardNumber;
+	}
 	
 	/**
 	 * @return the age
@@ -205,4 +228,26 @@ public class OOUser {
 		return (this.getString()).getBytes();
 	}
 	
+	@Override
+	public int hashCode(){
+		return (this.getId());
+	}
+	
+	/**
+	 * Checks if a object(user) is the same as another by comparing ID's.
+	 * @param user
+	 * @return bool
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof OOUser) {
+			if(this.hashCode() == obj.hashCode()) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return (super.equals(obj));
+		}
+	}
 }

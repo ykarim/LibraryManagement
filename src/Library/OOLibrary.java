@@ -2,9 +2,12 @@ package Library;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 public class OOLibrary {
+	//Maybe have a print method to show whole library as a table in console. for testing only
 	//Maybe a check existing method to check if id exists and another to check if firstname+ lastname exist
+	//Replace method calls with direct vars 
 	private ArrayList<OOBook> books = new ArrayList<OOBook>();
 	private ArrayList<OOUser> users = new ArrayList<OOUser>();
 	private ArrayList<OOAdmin> admins = new ArrayList<OOAdmin>();
@@ -23,12 +26,12 @@ public class OOLibrary {
 	 * @return OOBook
 	 */
 	public OOBook getBook(OOBook book){
-		for (int count = 0; count <= books.size(); count++){
-			if (books.get(count).getBytes() == book.getBytes()){
+		for (int count = 0; count < books.size(); count++) {
+			if (/*books.get(count).getBytes() == book.getBytes()*/ /*books.get(count).getString().equals(book.getString().trim())*/ 
+					books.get(count).equals(book)){ 
 				return book;
 			}
 		}
-		
 		return null;
 	}
 
@@ -53,8 +56,8 @@ public class OOLibrary {
 	 * @return OOUser
 	 */
 	public OOUser getUser(OOUser user){
-		for (int count = 0; count <= users.size(); count++){
-			if (users.get(count).getBytes() == user.getBytes()){
+		for (int count = 0; count < users.size(); count++){
+			if (users.get(count).equals(user)){
 				return user;
 			};
 		}
@@ -82,8 +85,8 @@ public class OOLibrary {
 	 * @return OOUser
 	 */
 	public OOAdmin getAdmin(OOAdmin admin){
-		for (int count = 0; count <= users.size(); count++){
-			if (admins.get(count).getBytes() == admin.getBytes()){
+		for (int count = 0; count < admins.size(); count++){
+			if (admins.get(count).equals(admin)){
 				return admin;
 			};
 		}
@@ -109,7 +112,21 @@ public class OOLibrary {
 		if (books.contains(book)) {
 			books.remove(book);
 		}else{
-			//do something
+
+		}
+	}
+	
+	/**
+	 * Checks if book exists by using getBook 
+	 * Make more complicated by checking book's props for a match. Filter through all books and find if any of them have all of the same props 
+	 * @param book
+	 * @return bool
+	 */
+	public boolean containsBook(OOBook book){ 
+		if (getBook(book) !=null /*fails: getBook(book).equals(book)*/){
+			return true;
+		}else{
+			return false;
 		}
 	}
 	
@@ -126,6 +143,20 @@ public class OOLibrary {
 			users.remove(user);
 		} else {
 			//do something
+		}
+	}
+	
+	/**
+	 * Checks if user exists by using getUser
+	 * Make more complicated by checking book's props for a match. Filter through all books and find if any of them have all of the same props 
+	 * @param user
+	 * @return bool
+	 */
+	public boolean containsUser(OOUser user){ 
+		if (getUser(user) !=null /*fails: getUser(user).equals(user)*/){
+			return true;
+		}else{
+			return false;
 		}
 	}
 	
@@ -146,8 +177,22 @@ public class OOLibrary {
 	}
 	
 	/**
+	 * Checks if admin exists by using getAdmin
+	 * Make more complicated by checking book's props for a match. Filter through all books and find if any of them have all of the same props 
+	 * @param user
+	 * @return bool
+	 */
+	public boolean containsAdmin(OOAdmin admin){ 
+		if (getAdmin(admin) !=null /*fails: getUser(user).equals(user)*/){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	/**
 	 * If book is available, gives user a number of book b due by Date dueDate
-	 * Availability takes into account reserves and checkouts
+	 * Availability takes into account reserv
+	 * es and checkouts
 	 * @param book
 	 * @param user
 	 * @param count
@@ -157,6 +202,7 @@ public class OOLibrary {
 		while (count > 0) {              //Maybe switch to for loop whichever is more efficient
 			OOBorrowedBook newBook = new OOBorrowedBook(book);
 			newBook.setDueDate(dueDate);
+			getBook(book).setNumAvailable(getBook(book).getNumAvailable()-1); //Deducts from number of books currently available
 			user.addCheckout(newBook);
 			count--;
 		}
@@ -164,7 +210,8 @@ public class OOLibrary {
 	
 	public void returnBook(OOBorrowedBook book, OOUser user, int count){
 		while (count>0) {
-			//Check for late fee. Let user save charge.
+			//Check for late fee. Let user save charge. Take off checkouts add num
+			getBook(book).setNumAvailable(getBook(book).getNumAvailable() + 1);
 			count--;
 		}
 	}
@@ -185,12 +232,14 @@ public class OOLibrary {
 	}
 	
 	public void sortBooks(){
-		for (int num = 0; num <= books.size(); num++){
-			if (books.get(num).getTitle().compareToIgnoreCase(books.get(num + 1).getTitle()) > 0){  //Book 1 is supposed to be after book 2
-				//Swap
-				OOBook temp = books.get(num + 1);
-				books.set(num + 1, books.get(num));
-				books.set(num, temp);
+		for(int i = 0; i < books.size(); i++){ //Either books.size or size-1 or +1 check it out on paper
+			for (int num = 0; num < books.size()-1; num++){
+				if (books.get(num).getTitle().compareToIgnoreCase(books.get(num + 1).getTitle()) > 0){  //Book 1 is supposed to be after book 2
+					//Swap
+					OOBook temp = books.get(num + 1);
+					books.set(num + 1, books.get(num));
+					books.set(num, temp);
+				}
 			}
 		}
 	}
@@ -222,6 +271,7 @@ public class OOLibrary {
 	  * Prevents books from having the same title. Not good practice.
 	  */
 	//Make it so that you could search by property instead of just title
+	@Deprecated
 	public OOBook searchBookByTitle(String title){
 		for (int count = 0; count <= books.size(); count++){
 			if (books.get(count).getTitle().compareToIgnoreCase(title.trim()) == 0){
@@ -229,5 +279,29 @@ public class OOLibrary {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * Return books with given properties
+	 * @param prop
+	 * @return
+	 * @Need Testing
+	 * create annotation need for testing, revision, or deletion etc.
+	 */
+	public ArrayList<OOBook> searchBooksByProp(Map<BookProperties, Object> props) {
+		ArrayList<OOBook> matchingBooks = new ArrayList<OOBook>();
+		for (int count = 0; count < books.size(); count++){  //Loops through all books
+			//OOBook match = null;
+			for(int num = 0; num < props.size(); num++){ //Loops through properties to find matching props
+				if (books.get(count).getProps().get(BookProperties.getProp(num)) == props.get(BookProperties.getProp(num))){ 
+					//Maybe have a counter of matching props
+					matchingBooks.add(books.get(count));   //Either this or 
+					//match = books.get(count);              //this
+					break;
+				}
+			}
+			//matchingBooks.add(match); //with this
+		}
+		return matchingBooks;
 	}
 }
