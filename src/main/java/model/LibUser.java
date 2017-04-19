@@ -27,7 +27,7 @@ public class LibUser extends User{
 		this.lname = lname;
 		this.username = username;
 		this.password = password;
-		this.age = age; 
+		this.age = age;
 		this.id = id;
 		this.cardNumber = cardNumber;
 	}
