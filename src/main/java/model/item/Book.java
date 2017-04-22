@@ -1,10 +1,7 @@
 package model.item;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
-@XmlRootElement(name = "book")
 public abstract class Book extends Item implements Serializable {
 
     private String publisher;
@@ -49,7 +46,6 @@ public abstract class Book extends Item implements Serializable {
     /**
      * @param publisher the publisher to set
      */
-    @XmlElement
     public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
@@ -64,7 +60,6 @@ public abstract class Book extends Item implements Serializable {
     /**
      * @param publicationYear the publicationYear to set
      */
-    @XmlElement
     public void setPublicationYear(int publicationYear) {
         this.publicationYear = publicationYear;
     }
@@ -79,7 +74,6 @@ public abstract class Book extends Item implements Serializable {
     /**
      * @param gradeLevel the gradeLevel to set
      */
-    @XmlElement
     public void setGradeLevel(int gradeLevel) {
         this.gradeLevel = gradeLevel;
     }
@@ -88,7 +82,6 @@ public abstract class Book extends Item implements Serializable {
         return ISBN;
     }
 
-    @XmlElement
     public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
