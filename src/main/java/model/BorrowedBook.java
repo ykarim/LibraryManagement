@@ -8,19 +8,21 @@ public class BorrowedBook extends Book {
 	private LibUser owner;
 	
 	/**
-	 * Creates a BorrowedBook given params
+     * Creates a BorrowedBook given params of book and :
      *
-	 */
+     * dueDate - date the borrowed book is due
+     * owner - current owner of this book
+     */
 	public BorrowedBook(String title, String author, String publisher, long ID, int publicationYear, int gradeLevel,
-                        int numAvailable, Date dueDate, LibUser owner) {
-		super(title, author, publisher, publicationYear, ID, gradeLevel, numAvailable);
-		this.dueDate = dueDate;
+                        int numAvailable, String ISBN, Date dueDate, LibUser owner) {
+        super(title, author, publisher, publicationYear, ID, gradeLevel, numAvailable, ISBN);
+        this.dueDate = dueDate;
 		this.owner = owner;
 	}
 
 	public BorrowedBook(Book book, Date dueDate, LibUser owner) {
 		this(book.getTitle(), book.getAuthor(), book.getPublisher(), book.getBookID(), book.getPublicationYear(),
-				book.getGradeLevel(), book.getNumAvailable(), dueDate, owner);
+                book.getGradeLevel(), book.getNumAvailable(), book.getISBN(), dueDate, owner);
     }
 
 	/**
