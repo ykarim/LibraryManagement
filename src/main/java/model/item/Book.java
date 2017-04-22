@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 @XmlRootElement(name = "book")
-public class Book extends Item implements Serializable {
+public abstract class Book extends Item implements Serializable {
 
     private String publisher;
     private int publicationYear, gradeLevel;
@@ -14,10 +14,9 @@ public class Book extends Item implements Serializable {
     public Book() {
     }
 
-    public Book(String title, String author, long bookID, int numAvailable) {
+    public Book(String title, String author, int numAvailable) {
         setTitle(title);
         setCreator(author);
-        setID(bookID);
         setNumAvailable(numAvailable);
     }
 
@@ -26,19 +25,17 @@ public class Book extends Item implements Serializable {
      * @param title - Title of book
      * @param author - Author of book
      * @param publisher - Publishing Company
-     * @param bookID  - Library's ID of the book
      * @param publicationYear - Year of Publication
      * @param gradeLevel - Grade Level for book (TODO: should change to enum (YA, Adult))
      * @param numAvailable - Number of books available in library
      */
-    public Book(String title, String author, String publisher, int publicationYear, int gradeLevel, int numAvailable, long bookID, String ISBN) {
+    public Book(String title, String author, String publisher, int publicationYear, int gradeLevel, int numAvailable, String ISBN) {
         setTitle(title);
         setCreator(author);
         this.publisher = publisher;
         this.publicationYear = publicationYear;
         this.gradeLevel = gradeLevel;
         this.ISBN = ISBN;
-        setID(bookID);
         setNumAvailable(numAvailable);
     }
 
@@ -95,6 +92,9 @@ public class Book extends Item implements Serializable {
     public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
+
+    @Override
+    public abstract long generateID();
 
     @Override
     public boolean equals(Object object) {

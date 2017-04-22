@@ -1,7 +1,7 @@
 package model.user;
 
 import model.item.Book;
-import model.item.BorrowedBook;
+import model.item.LibraryBook;
 
 import java.util.ArrayList;
 
@@ -9,8 +9,8 @@ public class LibUser extends User{
 	
 	private int age, balance;
 	private long cardNumber;
-	private ArrayList<BorrowedBook> checkouts = new ArrayList<BorrowedBook>();
-	private ArrayList<Book> reserves = new ArrayList<Book>();
+    private ArrayList<LibraryBook> checkouts = new ArrayList<LibraryBook>();
+    private ArrayList<Book> reserves = new ArrayList<Book>();
 
 	//Have pw be 8-16 or user set num of charac.
 	/**
@@ -81,8 +81,8 @@ public class LibUser extends User{
 	 * 
 	 * @return the checkouts
 	 */
-	public ArrayList<BorrowedBook> getCheckouts(){
-		return checkouts;
+    public ArrayList<LibraryBook> getCheckouts() {
+        return checkouts;
 	}
 	
 	/**
@@ -94,12 +94,12 @@ public class LibUser extends User{
 	}
 	
 	/**
-	 * Takes in BorrowedBook and adds it to user's checkouts arraylist. 
-	 * Check if borrowed book has dueDate assigned.
+     * Takes in LibraryBook and adds it to user's checkouts arraylist.
+     * Check if borrowed book has dueDate assigned.
 	 * Prev: Used to be setCheckouts and set arraylist checkouts
 	 */
-	public void addCheckout(BorrowedBook book) {
-		checkouts.add(book);
+    public void addCheckout(LibraryBook book) {
+        checkouts.add(book);
 		//Add to number of books available once returned. Subtract from num when taken out. 
 	}
 	
@@ -107,8 +107,8 @@ public class LibUser extends User{
 	 * Returns book and removes it from list of checkouts.
 	 * @param book
 	 */
-	public void removeCheckout(BorrowedBook book){
-		checkouts.remove(book);
+    public void removeCheckout(LibraryBook book) {
+        checkouts.remove(book);
 	}
 	
 	/**

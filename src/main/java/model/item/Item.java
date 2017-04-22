@@ -38,6 +38,8 @@ public abstract class Item {
         this.numAvailable = numAvailable;
     }
 
+    public abstract long generateID();
+
     public abstract String toString();
 
     @Override
