@@ -53,8 +53,11 @@
             <version>2.2.1.GA</version>
         </dependency>
 
-        <!-- <dependency> <groupId>org.jboss.resteasy</groupId> <artifactId>resteasy-jaxb-provider</artifactId>
-            <version>2.2.0.GA</version> </dependency> -->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxb-provider</artifactId>
+            <version>2.2.0.GA</version>
+        </dependency>
 
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
@@ -67,11 +70,10 @@
         <artifactId>forms_rt</artifactId>
         <version>7.0.3</version>
     </dependency>
-
     </dependencies>
 
     <build>
-        <finalName>Library Server</finalName>
+        <finalName>LibraryManagement</finalName>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

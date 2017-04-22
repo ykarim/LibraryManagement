@@ -13,14 +13,14 @@ public class BorrowedBook extends Book {
 	 */
 	public BorrowedBook(String title, String author, String publisher, long ID, int publicationYear, int gradeLevel,
                         int numAvailable, Date dueDate, LibUser owner) {
-		super(title, author, publisher, ID, publicationYear, gradeLevel, numAvailable);
+		super(title, author, publisher, publicationYear, ID, gradeLevel, numAvailable);
 		this.dueDate = dueDate;
 		this.owner = owner;
 	}
 
 	public BorrowedBook(Book book, Date dueDate, LibUser owner) {
-	    this(book.getTitle(), book.getAuthor(), book.getPublisher(), book.getID(), book.getPublicationYear(),
-                book.getGradeLevel(), book.getNumAvailable(), dueDate, owner);
+		this(book.getTitle(), book.getAuthor(), book.getPublisher(), book.getBookID(), book.getPublicationYear(),
+				book.getGradeLevel(), book.getNumAvailable(), dueDate, owner);
     }
 
 	/**
@@ -44,4 +44,8 @@ public class BorrowedBook extends Book {
     public void setOwner(LibUser owner) {
         this.owner = owner;
     }
+
+	public boolean equals(Object object) {
+		return (object instanceof Book && ((Book) object).getBookID() == getBookID());
+	}
 }

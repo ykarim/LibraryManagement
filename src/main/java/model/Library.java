@@ -1,8 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Map;
 
 public class Library {
 	//Maybe have a print method to show whole library as a table in console. for testing only
@@ -26,7 +24,7 @@ public class Library {
 	 */
 	protected Book getBook(int ID){
 		for (Book book : books) {
-			if (book.getID() == ID) {
+			if (book.getBookID() == ID) {
 				return book;
 			}
 		}
@@ -121,7 +119,7 @@ public class Library {
 	 */
 //	public boolean containsBook(Book newBook){
 //		for (Book book : books) {
-//			if (book.getID() == new)
+//			if (book.getBookID() == new)
 //		}
 //	}
 	
