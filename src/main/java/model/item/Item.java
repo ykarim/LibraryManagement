@@ -3,7 +3,7 @@ package model.item;
 public abstract class Item {
 
     private String title, creator;
-    private long ID;
+    private String ID;
     private int numAvailable;
 
     public String getTitle() {
@@ -22,11 +22,11 @@ public abstract class Item {
         this.creator = creator;
     }
 
-    public long getID() {
+    public String getID() {
         return ID;
     }
 
-    void setID(long ID) {
+    void setID(String ID) {
         this.ID = ID;
     }
 
@@ -38,7 +38,7 @@ public abstract class Item {
         this.numAvailable = numAvailable;
     }
 
-    public abstract long generateID();
+    public abstract String generateID();
 
     public abstract String toString();
 

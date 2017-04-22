@@ -94,7 +94,7 @@ public abstract class Book extends Item implements Serializable {
     }
 
     @Override
-    public abstract long generateID();
+    public abstract String generateID();
 
     @Override
     public boolean equals(Object object) {

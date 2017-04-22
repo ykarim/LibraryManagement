@@ -16,7 +16,7 @@ public class LibraryBook extends Book {
      * dueDate - date the borrowed book is due
      * owner - current owner of this book
      */
-    public LibraryBook(String title, String author, String publisher, long ID, int publicationYear, int gradeLevel,
+    public LibraryBook(String title, String author, String publisher, String ID, int publicationYear, int gradeLevel,
                        int numAvailable, String ISBN, Date dueDate, LibUser owner) {
         super(title, author, publisher, publicationYear, gradeLevel, numAvailable, ISBN);
         setID(ID);
@@ -52,7 +52,7 @@ public class LibraryBook extends Book {
     }
 
     @Override
-    public long generateID() {
-        return 0;
+    public String generateID() {
+        return "";
     }
 }
