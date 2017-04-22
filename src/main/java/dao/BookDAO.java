@@ -1,6 +1,6 @@
 package dao;
 
-import model.Book;
+import model.book.Book;
 
 import java.util.ArrayList;
 import java.util.List;

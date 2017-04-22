@@ -1,4 +1,6 @@
-package model;
+package model.book;
+
+import model.user.LibUser;
 
 import java.util.Date;
 

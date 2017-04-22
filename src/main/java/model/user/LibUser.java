@@ -1,4 +1,7 @@
-package model;
+package model.user;
+
+import model.book.Book;
+import model.book.BorrowedBook;
 
 import java.util.ArrayList;
 

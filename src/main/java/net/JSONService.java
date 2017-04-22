@@ -1,7 +1,7 @@
 package net;
 
 import dao.BookDAO;
-import model.Book;
+import model.book.Book;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
