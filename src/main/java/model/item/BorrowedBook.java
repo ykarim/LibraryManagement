@@ -1,4 +1,4 @@
-package model.book;
+package model.item;
 
 import model.user.LibUser;
 
@@ -17,13 +17,13 @@ public class BorrowedBook extends Book {
      */
 	public BorrowedBook(String title, String author, String publisher, long ID, int publicationYear, int gradeLevel,
                         int numAvailable, String ISBN, Date dueDate, LibUser owner) {
-        super(title, author, publisher, publicationYear, ID, gradeLevel, numAvailable, ISBN);
+        super(title, author, publisher, publicationYear, gradeLevel, numAvailable, ID, ISBN);
         this.dueDate = dueDate;
 		this.owner = owner;
 	}
 
 	public BorrowedBook(Book book, Date dueDate, LibUser owner) {
-		this(book.getTitle(), book.getAuthor(), book.getPublisher(), book.getBookID(), book.getPublicationYear(),
+        this(book.getTitle(), book.getCreator(), book.getPublisher(), book.getID(), book.getPublicationYear(),
                 book.getGradeLevel(), book.getNumAvailable(), book.getISBN(), dueDate, owner);
     }
 
@@ -48,8 +48,4 @@ public class BorrowedBook extends Book {
     public void setOwner(LibUser owner) {
         this.owner = owner;
     }
-
-	public boolean equals(Object object) {
-		return (object instanceof Book && ((Book) object).getBookID() == getBookID());
-	}
 }

@@ -14,7 +14,6 @@ public class Connection {
     public static void main(String[] args) {
 
         try {
-
             URL url = new URL("http://localhost:8080/LibraryManagement/json/book/post");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);

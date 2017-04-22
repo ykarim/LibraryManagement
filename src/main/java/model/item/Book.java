@@ -1,26 +1,24 @@
-package model.book;
+package model.item;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
-//Implement Item later on
 @XmlRootElement(name = "book")
-public class Book implements Serializable {
+public class Book extends Item implements Serializable {
 
-    private String title, author, publisher;
-    private int publicationYear, gradeLevel, numAvailable;
-    private long bookID;
+    private String publisher;
+    private int publicationYear, gradeLevel;
     private String ISBN;
 
     public Book() {
     }
 
     public Book(String title, String author, long bookID, int numAvailable) {
-        this.title = title;
-        this.author = author;
-        this.bookID = bookID;
-        this.numAvailable = numAvailable;
+        setTitle(title);
+        setCreator(author);
+        setID(bookID);
+        setNumAvailable(numAvailable);
     }
 
     /**
@@ -33,45 +31,15 @@ public class Book implements Serializable {
      * @param gradeLevel - Grade Level for book (TODO: should change to enum (YA, Adult))
      * @param numAvailable - Number of books available in library
      */
-    public Book(String title, String author, String publisher, int publicationYear, long bookID, int gradeLevel, int numAvailable, String ISBN) {
-        this.title = title;
-        this.author = author;
+    public Book(String title, String author, String publisher, int publicationYear, int gradeLevel, int numAvailable, long bookID, String ISBN) {
+        setTitle(title);
+        setCreator(author);
         this.publisher = publisher;
-        this.bookID = bookID;
         this.publicationYear = publicationYear;
         this.gradeLevel = gradeLevel;
-        this.numAvailable = numAvailable;
         this.ISBN = ISBN;
-    }
-
-    /**
-     * @return the title
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * @param title the title to set
-     */
-    @XmlElement
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    /**
-     * @return the author
-     */
-    public String getAuthor() {
-        return author;
-    }
-
-    /**
-     * @param author the author to set
-     */
-    @XmlElement
-    public void setAuthor(String author) {
-        this.author = author;
+        setID(bookID);
+        setNumAvailable(numAvailable);
     }
 
     /**
@@ -87,21 +55,6 @@ public class Book implements Serializable {
     @XmlElement
     public void setPublisher(String publisher) {
         this.publisher = publisher;
-    }
-
-    /**
-     * @return the bookID
-     */
-    public long getBookID() {
-        return bookID;
-    }
-
-    /**
-     * @param bookID the bookID to set
-     */
-    @XmlElement
-    public void setBookID(long bookID) {
-        this.bookID = bookID;
     }
 
     /**
@@ -134,21 +87,6 @@ public class Book implements Serializable {
         this.gradeLevel = gradeLevel;
     }
 
-    /**
-     * @return the numAvailable
-     */
-    public int getNumAvailable() {
-        return numAvailable;
-    }
-
-    /**
-     * @param numAvailable the numAvailable to set
-     */
-    @XmlElement
-    public void setNumAvailable(int numAvailable) {
-        this.numAvailable = numAvailable;
-    }
-
     public String getISBN() {
         return ISBN;
     }
@@ -165,6 +103,6 @@ public class Book implements Serializable {
 
     @Override
     public String toString() {
-        return "Book: [name=" + title + ", author=" + author + "]";
+        return "Book: [name=" + getTitle() + ", author=" + getCreator() + "]";
     }
 }

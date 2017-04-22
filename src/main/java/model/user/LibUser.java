@@ -1,7 +1,7 @@
 package model.user;
 
-import model.book.Book;
-import model.book.BorrowedBook;
+import model.item.Book;
+import model.item.BorrowedBook;
 
 import java.util.ArrayList;
 
