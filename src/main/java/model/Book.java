@@ -14,7 +14,13 @@ public class Book implements Serializable {
     private String ISBN;
 
     public Book() {
+    }
 
+    public Book(String title, String author, long bookID, int numAvailable) {
+        this.title = title;
+        this.author = author;
+        this.bookID = bookID;
+        this.numAvailable = numAvailable;
     }
 
     /**
@@ -27,7 +33,7 @@ public class Book implements Serializable {
      * @param gradeLevel - Grade Level for book (TODO: should change to enum (YA, Adult))
      * @param numAvailable - Number of books available in library
      */
-    public Book(String title, String author, String publisher, int publicationYear, long bookID, int gradeLevel, int numAvailable) {
+    public Book(String title, String author, String publisher, int publicationYear, long bookID, int gradeLevel, int numAvailable, String ISBN) {
         this.title = title;
         this.author = author;
         this.publisher = publisher;
@@ -35,6 +41,7 @@ public class Book implements Serializable {
         this.publicationYear = publicationYear;
         this.gradeLevel = gradeLevel;
         this.numAvailable = numAvailable;
+        this.ISBN = ISBN;
     }
 
     /**
