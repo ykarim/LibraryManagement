@@ -9,7 +9,7 @@
 
     <context-param>
         <param-name>resteasy.resources</param-name>
-        <param-value>net.JSONService</param-value>
+        <param-value>net.BookMethods</param-value>
     </context-param>
 
     <listener>

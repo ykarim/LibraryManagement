@@ -9,41 +9,64 @@ public class BookDAO {
 
     private static List<Book> books = new ArrayList<Book>();
 
-    public List<Book> getBooks() {
+    public static List<Book> getBooks() {
         return books;
     }
 
-    public Book getBookByTitle(String title) {
+    public List<Book> getBooksWithTitle(String title) {
+        List<Book> closeBooks = new ArrayList<Book>();
         if (books.size() > 0) {
             for (Book book : books) {
-                if (book.getTitle() != null && book.getTitle().equalsIgnoreCase(title)) {
-                    return book;
+                if (book.getTitle().equalsIgnoreCase(title)) {
+                    closeBooks.add(book);
                 }
             }
         }
-        return null;
+        return closeBooks;
     }
 
-    public List<Book> getBooksByTitle(String title) {
+    public List<Book> getBooksWithISBN(String ISBN) {
         List<Book> closeBooks = new ArrayList<Book>();
-        for (Book book : books) {
-            if (book.getTitle().contains(title)) {
-                closeBooks.add(book);
+        if (books.size() > 0) {
+            for (Book book : books) {
+                if (book.getISBN().equalsIgnoreCase(ISBN)) {
+                    closeBooks.add(book);
+                }
             }
         }
         return closeBooks;
     }
 
     public boolean createBook(Book book) {
-        books.add(book);
-        return false;
-    }
+        List<String> libraryISBN = new ArrayList<String>();
+        for (Book currentBook : books) {
+            libraryISBN.add(currentBook.getISBN().trim());
+        }
 
-    public boolean updateBook(Book book) {
+        if (!libraryISBN.contains(book.getISBN())) {
+            Book newBook = new Book();
+            newBook.setTitle(book.getTitle());
+            newBook.setCreator(book.getCreator());
+            newBook.setPublisher(book.getPublisher());
+            newBook.setPublicationYear(book.getPublicationYear());
+            newBook.setGradeLevel(book.getGradeLevel());
+            newBook.setISBN(book.getISBN());
+            books.add(newBook);
+            return true;
+        } else {
+            for (Book currentBook : books) {
+                if (currentBook.getISBN().equalsIgnoreCase(book.getISBN())
+                        && currentBook.getTitle().equalsIgnoreCase(book.getTitle())) {
+                    currentBook.setNumAvailable(currentBook.getNumAvailable() + 1);
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
     public boolean deleteBook(Book book) {
+
         return false;
     }
 }

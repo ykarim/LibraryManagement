@@ -10,7 +10,7 @@ public abstract class Item {
         return title;
     }
 
-    void setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
@@ -18,7 +18,7 @@ public abstract class Item {
         return creator;
     }
 
-    void setCreator(String creator) {
+    public void setCreator(String creator) {
         this.creator = creator;
     }
 
@@ -26,7 +26,7 @@ public abstract class Item {
         return ID;
     }
 
-    void setID(String ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 
@@ -34,7 +34,7 @@ public abstract class Item {
         return numAvailable;
     }
 
-    void setNumAvailable(int numAvailable) {
+    public void setNumAvailable(int numAvailable) {
         this.numAvailable = numAvailable;
     }
 
