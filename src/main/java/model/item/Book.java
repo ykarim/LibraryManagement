@@ -1,8 +1,6 @@
 package model.item;
 
-import java.io.Serializable;
-
-public abstract class Book extends Item implements Serializable {
+public class Book extends Item {
 
     private String publisher;
     private int publicationYear, gradeLevel;
@@ -87,7 +85,9 @@ public abstract class Book extends Item implements Serializable {
     }
 
     @Override
-    public abstract String generateID();
+    public String generateID() {
+        return null;
+    }
 
     @Override
     public boolean equals(Object object) {

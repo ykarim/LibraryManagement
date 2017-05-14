@@ -10,17 +10,14 @@ import java.net.URL;
 
 public class Connection {
 
-    // http://localhost:8080/RESTfulExample/json/product/post
     public static void main(String[] args) {
-
         try {
-            URL url = new URL("http://localhost:8080/LibraryManagement/json/book/post");
+            URL url = new URL("http://localhost:8080/LibraryManagement/json/book/post/book");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
-
-            String input = "{\"title\":\"john\",\"author\":\"iPad 4\"}";
+            String input = "{\"title\":\"h\",\"creator\":\"iPad 4\",\"isbn\":\"123\",\"id\":\"098\"}";
 
             OutputStream os = conn.getOutputStream();
             os.write(input.getBytes());
@@ -39,17 +36,11 @@ public class Connection {
             while ((output = br.readLine()) != null) {
                 System.out.println(output);
             }
-
             conn.disconnect();
-
         } catch (MalformedURLException e) {
-
             e.printStackTrace();
-
         } catch (IOException e) {
-
             e.printStackTrace();
-
         }
 
     }

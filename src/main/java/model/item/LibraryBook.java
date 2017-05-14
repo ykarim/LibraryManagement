@@ -8,8 +8,17 @@ public class LibraryBook extends Book {
 
 	private Date dueDate;
 	private LibUser owner;
-	
-	/**
+
+    public LibraryBook() {
+
+    }
+
+    public LibraryBook(Book book, Date dueDate, LibUser owner) {
+        this(book.getTitle(), book.getCreator(), book.getPublisher(), book.getID(), book.getPublicationYear(),
+                book.getGradeLevel(), book.getNumAvailable(), book.getISBN(), dueDate, owner);
+    }
+
+    /**
      * Creates a LibraryBook given params of book and :
      *
      * ID - the library's ID of the book for record keeping
@@ -23,11 +32,6 @@ public class LibraryBook extends Book {
         this.dueDate = dueDate;
 		this.owner = owner;
 	}
-
-    public LibraryBook(Book book, Date dueDate, LibUser owner) {
-        this(book.getTitle(), book.getCreator(), book.getPublisher(), book.getID(), book.getPublicationYear(),
-                book.getGradeLevel(), book.getNumAvailable(), book.getISBN(), dueDate, owner);
-    }
 
 	/**
 	 * @return the dueDate
