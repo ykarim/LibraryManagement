@@ -133,8 +133,8 @@ public class LibraryDAO {
     public boolean deleteLibraryBook(LibraryBook book) {
         if (books.size() > 0) {
             for (LibraryBook currentBook : books) {
-                if (currentBook.getISBN().equalsIgnoreCase(book.getISBN())) {
-                    books.set(books.indexOf(currentBook), book);
+                if (currentBook.getID().equalsIgnoreCase(book.getID())) {
+                    books.remove(books.indexOf(currentBook));
                 }
             }
         }

@@ -23,6 +23,7 @@ public class LibraryBookHandler {
                 libraryDAO.updateLibraryBook(packet.getBook());
                 break;
             case DELETE:
+                libraryDAO.deleteLibraryBook(packet.getBook());
                 break;
         }
     }
