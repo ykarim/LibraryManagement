@@ -90,11 +90,6 @@ public class Book extends Item {
     }
 
     @Override
-    public boolean equals(Object object) {
-        return (object instanceof Book && ((Book) object).getISBN().equals(this.ISBN));
-    }
-
-    @Override
     public String toString() {
         return "Book: [name=" + getTitle() + ", author=" + getCreator() + "]";
     }

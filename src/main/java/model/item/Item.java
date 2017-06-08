@@ -41,9 +41,4 @@ public abstract class Item {
     public abstract String generateID();
 
     public abstract String toString();
-
-    @Override
-    public boolean equals(Object obj) {
-        return (obj instanceof Item && ((Item) obj).getID() == this.getID());
-    }
 }
