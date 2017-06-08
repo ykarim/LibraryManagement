@@ -1,7 +1,9 @@
 package net;
 
 import model.user.LibUser;
-import net.packet.BookPacket;
+import net.handlers.LibraryBookHandler;
+import net.packet.LibraryBookPacket;
+import net.packet.LibraryBookPropertiesPacket;
 import net.packet.Packet;
 import util.Constants;
 
@@ -11,7 +13,6 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 public class LibServer extends Thread {
 
@@ -20,15 +21,18 @@ public class LibServer extends Thread {
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
 
+    private LibraryBookHandler libraryBookHandler;
+
     public boolean running = true;
     private ArrayList<LibUser> connectedClients = new ArrayList<LibUser>();
 
-    public void LibServer() {
+    public LibServer(LibraryBookHandler libraryBookHandler) {
         try {
             this.serverSocket = new ServerSocket(Constants.PORT);
             socket = serverSocket.accept();
             inputStream = new ObjectInputStream(socket.getInputStream());
             outputStream = new ObjectOutputStream(socket.getOutputStream());
+            libraryBookHandler = new LibraryBookHandler();
         } catch (IOException io) {
 
         }
@@ -38,10 +42,10 @@ public class LibServer extends Thread {
         while(running) {
             try {
                 Packet packet = (Packet) inputStream.readObject();
-                if (packet instanceof BookPacket) {
-
-                } else {
-
+                if (packet instanceof LibraryBookPacket) {
+                    libraryBookHandler.parseLibraryBookPacket((LibraryBookPacket) packet);
+                } else if (packet instanceof LibraryBookPropertiesPacket) {
+                    outputStream.writeObject(libraryBookHandler.parseBookPropertiesPacket((LibraryBookPropertiesPacket) packet));
                 }
             } catch (IOException ioException) {
 

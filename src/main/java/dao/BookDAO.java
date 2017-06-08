@@ -13,6 +13,12 @@ public class BookDAO {
         return books;
     }
 
+    /**
+     * Used to retrieve books with given string in their title
+     *
+     * @param title
+     * @return
+     */
     public List<Book> getBooksWithTitle(String title) {
         List<Book> closeBooks = new ArrayList<Book>();
         if (books.size() > 0) {
@@ -25,7 +31,13 @@ public class BookDAO {
         return closeBooks;
     }
 
-    public List<Book> getBooksWithISBN(String ISBN) {
+    /**
+     * Used to retrieve books with given string in their ISBN
+     *
+     * @param ISBN
+     * @return
+     */
+    public List<Book> getBooksWithISBNString(String ISBN) {
         List<Book> closeBooks = new ArrayList<Book>();
         if (books.size() > 0) {
             for (Book book : books) {
@@ -37,7 +49,7 @@ public class BookDAO {
         return closeBooks;
     }
 
-    public boolean createBook(Book book) {
+    boolean createBook(Book book) {
         List<String> libraryISBN = new ArrayList<String>();
         for (Book currentBook : books) {
             libraryISBN.add(currentBook.getISBN().trim());

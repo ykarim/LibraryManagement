@@ -20,10 +20,16 @@ public class LibraryDAO {
         return books;
     }
 
-    public List<Book> getBooksWithTitle(String title) {
-        List<Book> closeBooks = new ArrayList<Book>();
+    /**
+     * Returns all copies of a book with given string in their title
+     *
+     * @param title
+     * @return
+     */
+    public List<LibraryBook> getBooksWithTitle(String title) {
+        List<LibraryBook> closeBooks = new ArrayList<LibraryBook>();
         if (books.size() > 0) {
-            for (Book book : books) {
+            for (LibraryBook book : books) {
                 if (book.getTitle().equalsIgnoreCase(title)) {
                     closeBooks.add(book);
                 }
@@ -32,10 +38,16 @@ public class LibraryDAO {
         return closeBooks;
     }
 
-    public List<Book> getBooksWithISBN(String ISBN) {
-        List<Book> closeBooks = new ArrayList<Book>();
+    /**
+     * Returns all copies of a book with given string in their ISBN
+     *
+     * @param ISBN
+     * @return
+     */
+    public List<LibraryBook> getBooksWithISBN(String ISBN) {
+        List<LibraryBook> closeBooks = new ArrayList<LibraryBook>();
         if (books.size() > 0) {
-            for (Book book : books) {
+            for (LibraryBook book : books) {
                 if (book.getISBN().equalsIgnoreCase(ISBN)) {
                     closeBooks.add(book);
                 }
@@ -44,9 +56,15 @@ public class LibraryDAO {
         return closeBooks;
     }
 
-    public Book getBookByID(String bookID) {
+    /**
+     * Returns specific copy of book given ID number
+     *
+     * @param bookID
+     * @return
+     */
+    public LibraryBook getBookByID(String bookID) {
         if (books.size() > 0) {
-            for (Book book : books) {
+            for (LibraryBook book : books) {
                 if (book.getID() != null && book.getID().length() != 0 && book.getID().equalsIgnoreCase(bookID)) {
                     return book;
                 }
