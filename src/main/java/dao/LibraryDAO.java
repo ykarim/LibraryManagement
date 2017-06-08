@@ -22,7 +22,6 @@ public class LibraryDAO {
 
     /**
      * Returns all copies of a book with given string in their title
-     *
      * @param title
      * @return
      */
@@ -40,7 +39,6 @@ public class LibraryDAO {
 
     /**
      * Returns all copies of a book with given string in their ISBN
-     *
      * @param ISBN
      * @return
      */
@@ -58,7 +56,6 @@ public class LibraryDAO {
 
     /**
      * Returns specific copy of book given ID number
-     *
      * @param bookID
      * @return
      */
@@ -71,6 +68,16 @@ public class LibraryDAO {
             }
         }
         return null;
+    }
+
+    /**
+     * Retrieves all copies of a specific book using given book's ISBN
+     *
+     * @param book
+     * @return
+     */
+    public List<LibraryBook> getCopiesOfBook(Book book) {
+        return getBooksWithISBN(book.getISBN());
     }
 
     /**
