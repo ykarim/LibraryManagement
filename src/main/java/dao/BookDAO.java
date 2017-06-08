@@ -14,8 +14,24 @@ public class BookDAO {
     }
 
     /**
-     * Used to retrieve books with given string in their title
+     * Retrieves specific book with given title
      *
+     * @param title
+     * @return
+     */
+    public Book getBookWithTitle(String title) {
+        if (books.size() > 0) {
+            for (Book book : books) {
+                if (book.getTitle().equalsIgnoreCase(title)) {
+                    return book;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Used to retrieve books with given string in their title
      * @param title
      * @return
      */
@@ -23,7 +39,7 @@ public class BookDAO {
         List<Book> closeBooks = new ArrayList<Book>();
         if (books.size() > 0) {
             for (Book book : books) {
-                if (book.getTitle().equalsIgnoreCase(title)) {
+                if (book.getTitle().contains(title)) {
                     closeBooks.add(book);
                 }
             }
@@ -32,16 +48,32 @@ public class BookDAO {
     }
 
     /**
-     * Used to retrieve books with given string in their ISBN
+     * Retrives specific Book with given ISBN
      *
      * @param ISBN
      * @return
      */
-    public List<Book> getBooksWithISBNString(String ISBN) {
-        List<Book> closeBooks = new ArrayList<Book>();
+    public Book getBookWithISBN(String ISBN) {
         if (books.size() > 0) {
             for (Book book : books) {
                 if (book.getISBN().equalsIgnoreCase(ISBN)) {
+                    return book;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Used to retrieve books with given string in their ISBN
+     * @param ISBN
+     * @return
+     */
+    public List<Book> getBooksWithISBN(String ISBN) {
+        List<Book> closeBooks = new ArrayList<Book>();
+        if (books.size() > 0) {
+            for (Book book : books) {
+                if (book.getISBN().contains(ISBN)) {
                     closeBooks.add(book);
                 }
             }
