@@ -1,6 +1,8 @@
 package model.user;
 
-public abstract class User {
+import java.io.Serializable;
+
+public abstract class User implements Serializable {
 
     String fname, lname, username, password;
     long id;
