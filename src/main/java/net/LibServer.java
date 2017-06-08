@@ -17,15 +17,19 @@ public class LibServer extends Thread {
     public LibServer(int port) {
         try {
             this.serverSocket = new ServerSocket(port);
-        } catch (IOException ioException) {
-
+            runServer();
+        } catch (IOException io) {
+            io.printStackTrace();
         }
+    }
+
+    public void runServer() {
         while (running) {
             try {
                 socket = serverSocket.accept();
                 new LibraryServerThread(socket).start();
             } catch (IOException io) {
-
+                io.printStackTrace();
             }
         }
     }
