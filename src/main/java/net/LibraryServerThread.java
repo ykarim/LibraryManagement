@@ -5,6 +5,7 @@ import net.packet.LibraryBookPacket;
 import net.packet.LibraryBookPropertiesPacket;
 import net.packet.Packet;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -19,6 +20,15 @@ public class LibraryServerThread extends Thread {
 
     public LibraryServerThread(Socket socket) {
         this.socket = socket;
+
+        try {
+            inputStream = new ObjectInputStream(socket.getInputStream());
+            outputStream = new ObjectOutputStream(socket.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        libraryBookHandler = new LibraryBookHandler();
     }
 
     public void run() {
