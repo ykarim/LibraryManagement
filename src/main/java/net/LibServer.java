@@ -1,7 +1,5 @@
 package net;
 
-import model.user.LibUser;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,7 +10,7 @@ public class LibServer extends Thread {
     public boolean running = true;
     private ServerSocket serverSocket;
     private Socket socket;
-    private ArrayList<LibUser> connectedClients = new ArrayList<LibUser>();
+    private ArrayList<String> connectedClients = new ArrayList<>();
 
     public LibServer(int port) {
         try {
@@ -27,6 +25,7 @@ public class LibServer extends Thread {
         while (running) {
             try {
                 socket = serverSocket.accept();
+                connectedClients.add(socket.getRemoteSocketAddress().toString());
                 new LibraryServerThread(socket).start();
             } catch (IOException io) {
                 io.printStackTrace();
