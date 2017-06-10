@@ -12,12 +12,14 @@ import java.net.Socket;
 
 public class LibraryServerThread extends Thread {
 
+    private volatile boolean running;
     private Socket socket;
     private ObjectInputStream inputStream;
     private LibraryBookHandler libraryBookHandler;
     private ResponseHandler responseHandler;
 
     public LibraryServerThread(Socket socket) {
+        running = true;
         this.socket = socket;
 
         try {
@@ -31,7 +33,7 @@ public class LibraryServerThread extends Thread {
     }
 
     public void run() {
-        while (true) {
+        while (running) {
             try {
                 Packet packet = (Packet) inputStream.readObject();
                 if (packet != null) {
@@ -47,5 +49,13 @@ public class LibraryServerThread extends Thread {
                 e.printStackTrace();
             }
         }
+    }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
     }
 }
