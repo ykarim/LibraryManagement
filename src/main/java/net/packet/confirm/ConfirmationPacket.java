@@ -1,4 +1,4 @@
-package net.packet.response;
+package net.packet.confirm;
 
 import net.packet.Packet;
 

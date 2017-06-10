@@ -2,8 +2,8 @@ package net.handlers;
 
 import dao.LibraryDAO;
 import model.item.LibraryBook;
-import net.packet.LibraryBookPacket;
-import net.packet.LibraryBookPropertiesPacket;
+import net.packet.book.LibraryBookPacket;
+import net.packet.book.LibraryBookPropertiesPacket;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,20 +12,18 @@ public class LibraryBookHandler {
 
     private LibraryDAO libraryDAO = new LibraryDAO();
 
-    public void parseLibraryBookPacket(LibraryBookPacket packet) {
+    public boolean parseLibraryBookPacket(LibraryBookPacket packet) {
         switch (packet.getPacketType()) {
             case INVALID:
                 break;
             case CREATE:
-                libraryDAO.createBook(packet.getBook());
-                break;
+                return libraryDAO.createBook(packet.getBook());
             case UPDATE_LIBBOOK:
-                libraryDAO.updateLibraryBook(packet.getBook());
-                break;
+                return libraryDAO.updateLibraryBook(packet.getBook());
             case DELETE:
-                libraryDAO.deleteLibraryBook(packet.getBook());
-                break;
+                return libraryDAO.deleteLibraryBook(packet.getBook());
         }
+        return false;
     }
 
     public List<LibraryBook> parseBookPropertiesPacket(LibraryBookPropertiesPacket packet) {
