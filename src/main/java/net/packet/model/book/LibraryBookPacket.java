@@ -4,9 +4,7 @@ import model.item.book.LibraryBook;
 import net.packet.Packet;
 import net.packet.model.ModelPacketType;
 
-import java.io.Serializable;
-
-public class LibraryBookPacket extends Packet implements Serializable {
+public class LibraryBookPacket extends Packet {
 
     private ModelPacketType packetType;
     private LibraryBook book;
