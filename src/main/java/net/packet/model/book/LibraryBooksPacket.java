@@ -1,6 +1,6 @@
 package net.packet.model.book;
 
-import model.item.LibraryBook;
+import model.item.book.LibraryBook;
 import net.packet.Packet;
 
 /**

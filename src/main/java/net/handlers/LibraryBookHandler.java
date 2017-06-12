@@ -1,7 +1,7 @@
 package net.handlers;
 
 import dao.LibraryDAO;
-import model.item.LibraryBook;
+import model.item.book.LibraryBook;
 import net.packet.model.book.LibraryBookPacket;
 import net.packet.requests.RequestLibraryBookPacket;
 

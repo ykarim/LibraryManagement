@@ -1,7 +1,7 @@
 package dao;
 
-import model.item.Book;
-import model.item.LibraryBook;
+import model.item.book.Book;
+import model.item.book.LibraryBook;
 
 import java.util.ArrayList;
 import java.util.List;

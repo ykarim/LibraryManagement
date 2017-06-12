@@ -1,4 +1,4 @@
-package model.item;
+package model.item.book;
 
 import model.user.LibUser;
 

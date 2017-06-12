@@ -1,4 +1,6 @@
-package model.item;
+package model.item.book;
+
+import model.item.Item;
 
 public class Book extends Item {
 
