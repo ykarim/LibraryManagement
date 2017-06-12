@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public abstract class User implements Serializable {
 
-    String fname, lname, username, password;
-    long id;
+    private String fname, lname, username, password;
+    private long id;
 
     public User() {
 
