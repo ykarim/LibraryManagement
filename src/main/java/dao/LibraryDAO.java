@@ -16,7 +16,7 @@ public class LibraryDAO {
     private static List<LibraryBook> books = new ArrayList<LibraryBook>();
     private BookDAO bookDAO = new BookDAO();
 
-    public static List<LibraryBook> getBooks() {
+    public List<LibraryBook> getBooks() {
         return books;
     }
 

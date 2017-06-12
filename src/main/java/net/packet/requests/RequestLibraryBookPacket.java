@@ -1,13 +1,14 @@
-package net.packet.book;
+package net.packet.requests;
 
 import net.packet.Packet;
 
-public class LibraryBookPropertiesPacket extends Packet {
+public class RequestLibraryBookPacket extends Packet {
 
     private boolean singleBook;
     private BookProp property;
     private Object propertyValue;
-    public LibraryBookPropertiesPacket(boolean singleBook, BookProp property, Object propertyValue) {
+
+    public RequestLibraryBookPacket(boolean singleBook, BookProp property, Object propertyValue) {
         this.singleBook = singleBook;
         this.property = property;
         this.propertyValue = propertyValue;

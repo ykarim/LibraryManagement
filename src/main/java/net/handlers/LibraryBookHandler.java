@@ -3,7 +3,7 @@ package net.handlers;
 import dao.LibraryDAO;
 import model.item.LibraryBook;
 import net.packet.book.LibraryBookPacket;
-import net.packet.book.LibraryBookPropertiesPacket;
+import net.packet.requests.RequestLibraryBookPacket;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,11 @@ public class LibraryBookHandler {
         return false;
     }
 
-    public List<LibraryBook> parseBookPropertiesPacket(LibraryBookPropertiesPacket packet) {
+    public List<LibraryBook> parseLibraryBooksPacket() {
+        return libraryDAO.getBooks();
+    }
+
+    public List<LibraryBook> parseBookPropertiesPacket(RequestLibraryBookPacket packet) {
         switch (packet.getProperty()) {
             case TITLE:
                 return libraryDAO.getBooksWithTitle(packet.getPropertyValue().toString());

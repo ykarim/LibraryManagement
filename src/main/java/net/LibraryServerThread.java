@@ -1,10 +1,11 @@
 package net;
 
+import net.handlers.BookResponseHandler;
 import net.handlers.LibraryBookHandler;
-import net.handlers.ResponseHandler;
 import net.packet.Packet;
 import net.packet.book.LibraryBookPacket;
-import net.packet.book.LibraryBookPropertiesPacket;
+import net.packet.requests.RequestLibraryBookPacket;
+import net.packet.requests.RequestLibraryBooksPacket;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,7 +17,7 @@ public class LibraryServerThread extends Thread {
     private Socket socket;
     private ObjectInputStream inputStream;
     private LibraryBookHandler libraryBookHandler;
-    private ResponseHandler responseHandler;
+    private BookResponseHandler bookResponseHandler;
 
     public LibraryServerThread(Socket socket) {
         running = true;
@@ -24,7 +25,7 @@ public class LibraryServerThread extends Thread {
 
         try {
             inputStream = new ObjectInputStream(socket.getInputStream());
-            responseHandler = new ResponseHandler(socket.getOutputStream());
+            bookResponseHandler = new BookResponseHandler(socket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,9 +39,11 @@ public class LibraryServerThread extends Thread {
                 Packet packet = (Packet) inputStream.readObject();
                 if (packet != null) {
                     if (packet instanceof LibraryBookPacket) {
-                        responseHandler.sendData(libraryBookHandler.parseLibraryBookPacket((LibraryBookPacket) packet));
-                    } else if (packet instanceof LibraryBookPropertiesPacket) {
-                        responseHandler.sendData(libraryBookHandler.parseBookPropertiesPacket((LibraryBookPropertiesPacket) packet));
+                        bookResponseHandler.sendData(libraryBookHandler.parseLibraryBookPacket((LibraryBookPacket) packet));
+                    } else if (packet instanceof RequestLibraryBookPacket) {
+                        bookResponseHandler.sendData(libraryBookHandler.parseBookPropertiesPacket((RequestLibraryBookPacket) packet));
+                    } else if (packet instanceof RequestLibraryBooksPacket) {
+                        bookResponseHandler.sendBooks(libraryBookHandler.parseLibraryBooksPacket());
                     }
                 } else {
                     socket.close();

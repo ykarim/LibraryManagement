@@ -2,6 +2,8 @@ package net.handlers;
 
 import model.item.Book;
 import model.item.LibraryBook;
+import net.packet.Packet;
+import net.packet.book.LibraryBooksPacket;
 import net.packet.confirm.ConfirmationPacket;
 
 import java.io.IOException;
@@ -13,11 +15,11 @@ import java.util.List;
 /**
  * Class used to communicate results of network calls back to client
  */
-public class ResponseHandler {
+public class BookResponseHandler {
 
     private ObjectOutputStream outputStream;
 
-    public ResponseHandler(OutputStream outputStream) {
+    public BookResponseHandler(OutputStream outputStream) {
         try {
             this.outputStream = new ObjectOutputStream(outputStream);
         } catch (IOException e) {
@@ -29,11 +31,11 @@ public class ResponseHandler {
      * Replies to client packet by sending ConfirmationPacket to client via ObjectOutputStream
      * Use case example: send back confirmation if book exists
      *
-     * @param confirmationPacket
+     * @param packetToSend
      */
-    private void sendData(ConfirmationPacket confirmationPacket) {
+    private void sendData(Packet packetToSend) {
         try {
-            outputStream.writeObject(confirmationPacket);
+            outputStream.writeObject(packetToSend);
             outputStream.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -47,6 +49,12 @@ public class ResponseHandler {
      */
     public void sendData(boolean confirmation) {
         sendData(new ConfirmationPacket(confirmation, null));
+    }
+
+    public void sendBooks(List<LibraryBook> books) {
+        for (LibraryBook libBook : books) {
+            sendData(new LibraryBooksPacket(libBook, books.indexOf(libBook), books.size()));
+        }
     }
 
     /**
