@@ -1,4 +1,4 @@
-package net.packet.book;
+package net.packet.model.book;
 
 import model.item.LibraryBook;
 import net.packet.Packet;

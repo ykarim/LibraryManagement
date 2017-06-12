@@ -2,7 +2,7 @@ package net.handlers;
 
 import dao.LibraryDAO;
 import model.item.LibraryBook;
-import net.packet.book.LibraryBookPacket;
+import net.packet.model.book.LibraryBookPacket;
 import net.packet.requests.RequestLibraryBookPacket;
 
 import java.util.ArrayList;

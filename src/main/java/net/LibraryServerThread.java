@@ -3,7 +3,7 @@ package net;
 import net.handlers.BookResponseHandler;
 import net.handlers.LibraryBookHandler;
 import net.packet.Packet;
-import net.packet.book.LibraryBookPacket;
+import net.packet.model.book.LibraryBookPacket;
 import net.packet.requests.RequestLibraryBookPacket;
 import net.packet.requests.RequestLibraryBooksPacket;
 

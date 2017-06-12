@@ -3,8 +3,8 @@ package net.handlers;
 import model.item.Book;
 import model.item.LibraryBook;
 import net.packet.Packet;
-import net.packet.book.LibraryBooksPacket;
 import net.packet.confirm.ConfirmationPacket;
+import net.packet.model.book.LibraryBooksPacket;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
