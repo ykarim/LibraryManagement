@@ -3,6 +3,7 @@ package net.handlers;
 import dao.UserDAO;
 import model.user.LibUser;
 import model.user.NetUser;
+import net.packet.model.user.LibUserPacket;
 import net.packet.requests.RequestNetUserPacket;
 
 import java.util.ArrayList;
@@ -17,6 +18,23 @@ public class LibraryUserHandler {
      */
     public LibraryUserHandler() {
         userDAO = new UserDAO();
+    }
+
+    /**
+     * @param packet
+     */
+    public boolean parseLibUserPacket(LibUserPacket packet) {
+        switch (packet.getPacketType()) {
+            case INVALID:
+                return false;
+            case CREATE:
+                return userDAO.createUser(packet.getUser());
+            case UPDATE_LIBBOOK:
+                return userDAO.updateUser(packet.getUser());
+            case DELETE:
+                return userDAO.deleteUser(packet.getUser());
+        }
+        return false;
     }
 
     /**
