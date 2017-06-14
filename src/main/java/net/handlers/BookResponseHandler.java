@@ -1,6 +1,5 @@
 package net.handlers;
 
-import model.item.book.Book;
 import model.item.book.LibraryBook;
 import net.packet.Packet;
 import net.packet.confirm.ConfirmationPacket;
@@ -66,10 +65,7 @@ public class BookResponseHandler {
     public void sendData(List<LibraryBook> booksToSend) {
         if (booksToSend != null && booksToSend.size() > 0) {
             ArrayList<Object> dataToSend = new ArrayList<>();
-            for (Book book : booksToSend) {
-                Object objBook = book;
-                dataToSend.add(objBook);
-            }
+            dataToSend.addAll(booksToSend);
             sendData(new ConfirmationPacket(true, dataToSend));
         }
     }

@@ -44,9 +44,7 @@ public class UserResponseHandler {
     public void sendData(List<NetUser> usersToSend) {
         if (usersToSend.size() > 0) {
             ArrayList<Object> objUsersToSend = new ArrayList<>();
-            for (NetUser user : usersToSend) {
-                objUsersToSend.add(user);
-            }
+            objUsersToSend.addAll(usersToSend);
             sendData(new ConfirmationPacket(true, objUsersToSend));
         } else {
             sendData(new ConfirmationPacket(false, null));
