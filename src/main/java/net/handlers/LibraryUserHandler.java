@@ -3,6 +3,8 @@ package net.handlers;
 import dao.UserDAO;
 import model.user.LibUser;
 import model.user.NetUser;
+import model.user.User;
+import net.packet.auth.LoginPacket;
 import net.packet.model.user.LibUserPacket;
 import net.packet.requests.RequestNetUserPacket;
 
@@ -59,5 +61,9 @@ public class LibraryUserHandler {
                 return userToReturn;
         }
         return null;
+    }
+
+    public User parseLoginPacket(LoginPacket packet) {
+        return userDAO.loginUser(packet.getUsername(), packet.getPassword());
     }
 }

@@ -5,6 +5,7 @@ import net.handlers.LibraryBookHandler;
 import net.handlers.LibraryUserHandler;
 import net.handlers.UserResponseHandler;
 import net.packet.Packet;
+import net.packet.auth.LoginPacket;
 import net.packet.model.book.LibraryBookPacket;
 import net.packet.model.user.LibUserPacket;
 import net.packet.requests.RequestLibraryBookPacket;
@@ -56,6 +57,8 @@ public class LibraryServerThread extends Thread {
                         bookResponseHandler.sendBooks(libraryBookHandler.parseLibraryBooksPacket());
                     } else if (packet instanceof RequestNetUserPacket) {
                         userResponseHandler.sendData(libraryUserHandler.parseNetUserPacket((RequestNetUserPacket) packet));
+                    } else if (packet instanceof LoginPacket) {
+                        userResponseHandler.sendData(libraryUserHandler.parseLoginPacket((LoginPacket) packet));
                     }
                 } else {
                     socket.close();

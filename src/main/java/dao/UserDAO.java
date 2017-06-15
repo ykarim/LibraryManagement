@@ -80,6 +80,17 @@ public class UserDAO {
         return (usersWithCardNum.size() > 0) ? usersWithCardNum : null;
     }
 
+    private User getUserWithUsername(String username) {
+        if (users.size() > 0) {
+            for (User user : users) {
+                if (user.getUsername().equalsIgnoreCase(username)) {
+                    return user;
+                }
+            }
+        }
+        return null;
+    }
+
     public User getUserWithId(long iD) {
         if (users.size() > 0) {
             for (User user : users) {
@@ -121,5 +132,9 @@ public class UserDAO {
             }
         }
         return false;
+    }
+
+    public User loginUser(String username, String password) {
+        return getUserWithUsername(username).getPassword().equalsIgnoreCase(password) ? getUserWithUsername(username) : null;
     }
 }
