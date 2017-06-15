@@ -31,7 +31,7 @@ public class LibraryUserHandler {
                 return false;
             case CREATE:
                 return userDAO.createUser(packet.getUser());
-            case UPDATE_LIBBOOK:
+            case UPDATE:
                 return userDAO.updateUser(packet.getUser());
             case DELETE:
                 return userDAO.deleteUser(packet.getUser());
@@ -57,7 +57,7 @@ public class LibraryUserHandler {
                 }
                 return userToReturn;
             case ID:
-                userToReturn.add(new NetUser((LibUser) userDAO.getUserWithId(Long.valueOf(packet.getPropValue().toString()))));
+                userToReturn.add(new NetUser((LibUser) userDAO.getUserWithId(Long.parseLong(packet.getPropValue().toString()))));
                 return userToReturn;
         }
         return null;

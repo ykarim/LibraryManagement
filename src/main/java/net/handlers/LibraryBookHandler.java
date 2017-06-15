@@ -18,7 +18,7 @@ public class LibraryBookHandler {
                 break;
             case CREATE:
                 return libraryDAO.createBook(packet.getBook());
-            case UPDATE_LIBBOOK:
+            case UPDATE:
                 return libraryDAO.updateLibraryBook(packet.getBook());
             case DELETE:
                 return libraryDAO.deleteLibraryBook(packet.getBook());

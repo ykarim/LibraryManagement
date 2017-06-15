@@ -2,7 +2,7 @@ package net.packet.model;
 
 public enum ModelPacketType {
 
-    INVALID(-1), CREATE(0), UPDATE_LIBBOOK(2), DELETE(3);
+    INVALID(-1), CREATE(0), UPDATE(2), DELETE(3);
 
     private int typeId;
 
