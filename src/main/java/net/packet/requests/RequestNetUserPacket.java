@@ -8,6 +8,12 @@ public class RequestNetUserPacket extends Packet {
     private UserProp userProp;
     private Object propValue;
 
+    public RequestNetUserPacket(boolean singleUser, UserProp userProp, Object propValue) {
+        this.singleUser = singleUser;
+        this.userProp = userProp;
+        this.propValue = propValue;
+    }
+
     public UserProp getUserProp() {
         return userProp;
     }
