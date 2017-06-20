@@ -4,9 +4,14 @@ import util.Constants;
 
 public class Password {
 
-    private static int minLength = Constants.PASSWORD_MIN_LENGTH, maxLength = Constants.PASSWORD_MAX_LENGTH;
+    private static int minLength = Constants.DEFAULT_PASSWORD_MIN_LENGTH, maxLength = Constants.DEFAULT_PASSWORD_MAX_LENGTH;
     private String passwordHashed;
 
+    /**
+     * Stores hashed password
+     *
+     * @param password
+     */
     public Password(String password) {
         passwordHashed = Encryption.encryptString(password);
     }
@@ -23,6 +28,9 @@ public class Password {
         return passwordHashed;
     }
 
+    /**
+     * Randomly generates password of random length between min. and max. using ASCII characters #32-126
+     */
     public void generateRandomPassword() {
         StringBuilder stringBuilder = new StringBuilder();
         final int firstAsciiChar = 32;
