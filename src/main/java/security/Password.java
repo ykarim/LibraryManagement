@@ -1,8 +1,10 @@
 package security;
 
+import util.Constants;
+
 public class Password {
 
-    private static int minLength, maxLength;
+    private static int minLength = Constants.PASSWORD_MIN_LENGTH, maxLength = Constants.PASSWORD_MAX_LENGTH;
     private String passwordHashed;
 
     public Password(String password) {
@@ -17,7 +19,7 @@ public class Password {
         Password.maxLength = maxLength;
     }
 
-    public String getPasswordHashed() {
+    public String getPassword() {
         return passwordHashed;
     }
 
