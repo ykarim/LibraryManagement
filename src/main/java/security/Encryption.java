@@ -1,16 +1,17 @@
 package security;
 
-import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 class Encryption {
 
     private static final int WORK_ROUNDS = 12;
+    private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     static String encryptString(String str) {
-        return BCrypt.hashpw(str, BCrypt.gensalt(WORK_ROUNDS));
+        return encoder.encode(str);
     }
 
     static boolean checkEncryptedStr(String unhashed, String encrypted) {
-        return BCrypt.checkpw(unhashed, encrypted);
+        return encoder.matches(unhashed, encrypted);
     }
 }
