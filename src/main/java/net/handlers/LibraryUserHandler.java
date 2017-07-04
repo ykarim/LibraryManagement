@@ -5,6 +5,7 @@ import model.user.LibUser;
 import model.user.NetUser;
 import model.user.User;
 import net.packet.auth.LoginPacket;
+import net.packet.model.user.LibAdminPacket;
 import net.packet.model.user.LibUserPacket;
 import net.packet.requests.RequestNetUserPacket;
 
@@ -38,6 +39,26 @@ public class LibraryUserHandler {
                 return userDAO.updateUser(packet.getUser());
             case DELETE:
                 return userDAO.deleteUser(packet.getUser());
+        }
+        return false;
+    }
+
+    /**
+     * Reads information from LibAdminPacket to process operation requested
+     *
+     * @param packet
+     * @return boolean representing success of operation
+     */
+    public boolean parseLibAdminPacket(LibAdminPacket packet) {
+        switch (packet.getPacketType()) {
+            case INVALID:
+                return false;
+            case CREATE:
+                return userDAO.createUser(packet.getLibAdmin());
+            case UPDATE:
+                return userDAO.updateUser(packet.getLibAdmin());
+            case DELETE:
+                return userDAO.deleteUser(packet.getLibAdmin());
         }
         return false;
     }
