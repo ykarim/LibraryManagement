@@ -4,7 +4,7 @@ import model.item.book.LibraryBook;
 import net.packet.Packet;
 
 /**
- * Packet used to send all library books to client
+ * Packet used to send all library books or any group of library books to client
  * Does so by sending position of current Book being sent and the total number of books
  * Client waits until position = size then stops waiting for reply
  */

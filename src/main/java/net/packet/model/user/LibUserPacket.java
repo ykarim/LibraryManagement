@@ -4,6 +4,9 @@ import model.user.LibUser;
 import net.packet.Packet;
 import net.packet.model.ModelPacketType;
 
+/**
+ * Packet sent to server to specify LibUser CUD (no READ) operation to be performed
+ */
 public class LibUserPacket extends Packet {
 
     private ModelPacketType packetType;
