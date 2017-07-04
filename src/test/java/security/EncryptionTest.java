@@ -2,6 +2,7 @@ package security;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class EncryptionTest {
@@ -18,5 +19,6 @@ public class EncryptionTest {
     @Test
     public void testCheckEncryptedStr() {
         assertTrue(Encryption.checkEncryptedStr(TEST_STR, TEST_HASH));
+        assertFalse(Encryption.checkEncryptedStr(Encryption.encryptString(TEST_STR), TEST_HASH));
     }
 }
