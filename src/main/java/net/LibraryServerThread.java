@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 
+/**
+ * Created for each client connected and handles all received packets through respective packet handlers
+ */
 public class LibraryServerThread extends Thread {
 
     private volatile boolean running;
@@ -26,6 +29,10 @@ public class LibraryServerThread extends Thread {
     private BookResponseHandler bookResponseHandler;
     private UserResponseHandler userResponseHandler;
 
+    /**
+     * Starts Thread as well as inputStream to receive packets and creates handlers to process received packets
+     * @param socket
+     */
     public LibraryServerThread(Socket socket) {
         running = true;
         this.socket = socket;
@@ -42,6 +49,9 @@ public class LibraryServerThread extends Thread {
         libraryUserHandler = new LibraryUserHandler();
     }
 
+    /**
+     * Sends all respective packets (non-null) to their handlers
+     */
     public void run() {
         while (running) {
             try {

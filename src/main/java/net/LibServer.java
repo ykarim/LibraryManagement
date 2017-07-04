@@ -12,6 +12,10 @@ public class LibServer extends Thread {
     private Socket socket;
     private ArrayList<String> connectedClients = new ArrayList<>();
 
+    /**
+     * Starts Library Server at specified port
+     * @param port
+     */
     public LibServer(int port) {
         try {
             this.serverSocket = new ServerSocket(port);
@@ -21,6 +25,10 @@ public class LibServer extends Thread {
         }
     }
 
+    /**
+     * Accepts connection and creates new LibraryServerThread for each client connected
+     * Also adds client's IP address to  (arrList) connectedClients for future use
+     */
     public void runServer() {
         while (running) {
             try {
