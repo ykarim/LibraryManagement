@@ -1,7 +1,7 @@
 package model.user;
 
-import model.item.Book;
-import model.item.LibraryBook;
+import model.item.book.Book;
+import model.item.book.LibraryBook;
 
 import java.util.ArrayList;
 
@@ -26,12 +26,8 @@ public class LibUser extends User{
 	 */
 	public LibUser(String fname, String lname, String username, String password,
 				   int age, long id, long cardNumber){
-		this.fname = fname;
-		this.lname = lname;
-		this.username = username;
-		this.password = password;
+		super(fname, lname, username, password, id);
 		this.age = age;
-		this.id = id;
 		this.cardNumber = cardNumber;
 	}
 	

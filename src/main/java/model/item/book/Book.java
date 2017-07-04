@@ -1,4 +1,6 @@
-package model.item;
+package model.item.book;
+
+import model.item.Item;
 
 public class Book extends Item {
 
@@ -87,11 +89,6 @@ public class Book extends Item {
     @Override
     public String generateID() {
         return null;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        return (object instanceof Book && ((Book) object).getISBN().equals(this.ISBN));
     }
 
     @Override

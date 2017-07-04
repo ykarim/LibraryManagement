@@ -8,12 +8,8 @@ public class LibAdmin extends User {
 	 * @param password
 	 */
 	public LibAdmin(String fname, String lname, String username, String password, long id){
-		this.fname = fname;
-		this.lname = lname;
-	    this.username = username;
-		this.password = password;
-		this.id = id;
-	}
+        super(fname, lname, username, password, id);
+    }
 
 	public long generateID(){
 		return 0L;

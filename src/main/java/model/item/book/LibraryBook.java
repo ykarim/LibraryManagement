@@ -1,4 +1,4 @@
-package model.item;
+package model.item.book;
 
 import model.user.LibUser;
 
@@ -29,23 +29,23 @@ public class LibraryBook extends Book {
                        int numAvailable, String ISBN, Date dueDate, LibUser owner) {
         super(title, author, publisher, publicationYear, gradeLevel, numAvailable, ISBN);
         setID(ID);
-        this.dueDate = dueDate;
-		this.owner = owner;
+        this.dueDate = new Date(dueDate.getTime());
+        this.owner = owner;
 	}
 
 	/**
 	 * @return the dueDate
 	 */
 	public Date getDueDate() {
-		return dueDate;
-	}
+        return new Date(dueDate.getTime());
+    }
 
 	/**
 	 * @param dueDate the dueDate to set
 	 */
 	public void setDueDate(Date dueDate) {
-		this.dueDate = dueDate;
-	}
+        this.dueDate = new Date(dueDate.getTime());
+    }
 
     public LibUser getOwner() {
         return owner;

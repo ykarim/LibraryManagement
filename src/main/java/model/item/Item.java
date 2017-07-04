@@ -1,6 +1,8 @@
 package model.item;
 
-public abstract class Item {
+import java.io.Serializable;
+
+public abstract class Item implements Serializable {
 
     private String title, creator;
     private String ID;
@@ -41,9 +43,4 @@ public abstract class Item {
     public abstract String generateID();
 
     public abstract String toString();
-
-    @Override
-    public boolean equals(Object obj) {
-        return (obj instanceof Item && ((Item) obj).getID() == this.getID());
-    }
 }

@@ -1,6 +1,6 @@
 package dao;
 
-import model.item.Book;
+import model.item.book.Book;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +13,33 @@ public class BookDAO {
         return books;
     }
 
+    /**
+     * Retrieves specific book with given title
+     *
+     * @param title
+     * @return
+     */
+    public Book getBookWithTitle(String title) {
+        if (books.size() > 0) {
+            for (Book book : books) {
+                if (book.getTitle().equalsIgnoreCase(title)) {
+                    return book;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Used to retrieve books with given string in their title
+     * @param title
+     * @return
+     */
     public List<Book> getBooksWithTitle(String title) {
         List<Book> closeBooks = new ArrayList<Book>();
         if (books.size() > 0) {
             for (Book book : books) {
-                if (book.getTitle().equalsIgnoreCase(title)) {
+                if (book.getTitle().contains(title)) {
                     closeBooks.add(book);
                 }
             }
@@ -25,11 +47,33 @@ public class BookDAO {
         return closeBooks;
     }
 
+    /**
+     * Retrives specific Book with given ISBN
+     *
+     * @param ISBN
+     * @return
+     */
+    public Book getBookWithISBN(String ISBN) {
+        if (books.size() > 0) {
+            for (Book book : books) {
+                if (book.getISBN().equalsIgnoreCase(ISBN)) {
+                    return book;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Used to retrieve books with given string in their ISBN
+     * @param ISBN
+     * @return
+     */
     public List<Book> getBooksWithISBN(String ISBN) {
         List<Book> closeBooks = new ArrayList<Book>();
         if (books.size() > 0) {
             for (Book book : books) {
-                if (book.getISBN().equalsIgnoreCase(ISBN)) {
+                if (book.getISBN().contains(ISBN)) {
                     closeBooks.add(book);
                 }
             }
@@ -37,7 +81,7 @@ public class BookDAO {
         return closeBooks;
     }
 
-    public boolean createBook(Book book) {
+    boolean createBook(Book book) {
         List<String> libraryISBN = new ArrayList<String>();
         for (Book currentBook : books) {
             libraryISBN.add(currentBook.getISBN().trim());

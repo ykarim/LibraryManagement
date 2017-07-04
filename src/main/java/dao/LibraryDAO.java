@@ -1,7 +1,7 @@
 package dao;
 
-import model.item.Book;
-import model.item.LibraryBook;
+import model.item.book.Book;
+import model.item.book.LibraryBook;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +16,19 @@ public class LibraryDAO {
     private static List<LibraryBook> books = new ArrayList<LibraryBook>();
     private BookDAO bookDAO = new BookDAO();
 
-    public static List<LibraryBook> getBooks() {
+    public List<LibraryBook> getBooks() {
         return books;
     }
 
-    public List<Book> getBooksWithTitle(String title) {
-        List<Book> closeBooks = new ArrayList<Book>();
+    /**
+     * Returns all copies of a book with given string in their title
+     * @param title
+     * @return
+     */
+    public List<LibraryBook> getBooksWithTitle(String title) {
+        List<LibraryBook> closeBooks = new ArrayList<LibraryBook>();
         if (books.size() > 0) {
-            for (Book book : books) {
+            for (LibraryBook book : books) {
                 if (book.getTitle().equalsIgnoreCase(title)) {
                     closeBooks.add(book);
                 }
@@ -32,10 +37,15 @@ public class LibraryDAO {
         return closeBooks;
     }
 
-    public List<Book> getBooksWithISBN(String ISBN) {
-        List<Book> closeBooks = new ArrayList<Book>();
+    /**
+     * Returns all copies of a book with given string in their ISBN
+     * @param ISBN
+     * @return
+     */
+    public List<LibraryBook> getBooksWithISBN(String ISBN) {
+        List<LibraryBook> closeBooks = new ArrayList<LibraryBook>();
         if (books.size() > 0) {
-            for (Book book : books) {
+            for (LibraryBook book : books) {
                 if (book.getISBN().equalsIgnoreCase(ISBN)) {
                     closeBooks.add(book);
                 }
@@ -44,15 +54,30 @@ public class LibraryDAO {
         return closeBooks;
     }
 
-    public Book getBookByID(String bookID) {
+    /**
+     * Returns specific copy of book given ID number
+     * @param bookID
+     * @return
+     */
+    public LibraryBook getBookByID(String bookID) {
         if (books.size() > 0) {
-            for (Book book : books) {
+            for (LibraryBook book : books) {
                 if (book.getID() != null && book.getID().length() != 0 && book.getID().equalsIgnoreCase(bookID)) {
                     return book;
                 }
             }
         }
         return null;
+    }
+
+    /**
+     * Retrieves all copies of a specific book using given book's ISBN
+     *
+     * @param book
+     * @return
+     */
+    public List<LibraryBook> getCopiesOfBook(Book book) {
+        return getBooksWithISBN(book.getISBN());
     }
 
     /**
@@ -108,8 +133,8 @@ public class LibraryDAO {
     public boolean deleteLibraryBook(LibraryBook book) {
         if (books.size() > 0) {
             for (LibraryBook currentBook : books) {
-                if (currentBook.getISBN().equalsIgnoreCase(book.getISBN())) {
-                    books.set(books.indexOf(currentBook), book);
+                if (currentBook.getID().equalsIgnoreCase(book.getID())) {
+                    books.remove(books.indexOf(currentBook));
                 }
             }
         }
