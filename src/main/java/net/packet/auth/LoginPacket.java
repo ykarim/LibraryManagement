@@ -2,6 +2,10 @@ package net.packet.auth;
 
 import net.packet.Packet;
 
+/**
+ * Sent to server to handle user authorization. Username and password are both sent in plain text for authorization by
+ * server.
+ */
 public class LoginPacket extends Packet {
 
     private String username, password;
