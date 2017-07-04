@@ -8,10 +8,19 @@ import net.packet.requests.RequestLibraryBookPacket;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Process CRUD operations for LibraryBook objects
+ */
 public class LibraryBookHandler {
 
     private LibraryDAO libraryDAO = new LibraryDAO();
 
+    /**
+     * Reads information from LibraryBookPacket to process operation requested
+     *
+     * @param packet
+     * @return boolean representing success of operation
+     */
     public boolean parseLibraryBookPacket(LibraryBookPacket packet) {
         switch (packet.getPacketType()) {
             case INVALID:
@@ -26,10 +35,21 @@ public class LibraryBookHandler {
         return false;
     }
 
+    /**
+     * Upon receiving request to send over all library books, returns library book list
+     *
+     * @return all LibraryBook objs in the form of an arrList
+     */
     public List<LibraryBook> parseLibraryBooksPacket() {
         return libraryDAO.getBooks();
     }
 
+    /**
+     * Handles get requests by returning list of LibraryBooks matching specified features read from RequestLibraryBookPacket
+     *
+     * @param packet
+     * @return
+     */
     public List<LibraryBook> parseBookPropertiesPacket(RequestLibraryBookPacket packet) {
         switch (packet.getProperty()) {
             case TITLE:

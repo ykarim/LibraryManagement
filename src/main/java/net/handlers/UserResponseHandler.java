@@ -13,6 +13,9 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Communicates results of User CRUD operations back to client
+ */
 public class UserResponseHandler {
 
     private ObjectOutputStream outputStream;
@@ -27,7 +30,6 @@ public class UserResponseHandler {
 
     /**
      * Replies to client packet by sending Packet obj to client via ObjectOutputStream
-     * Use case example: send back confirmation if user exists
      *
      * @param packetToSend
      */
@@ -40,16 +42,30 @@ public class UserResponseHandler {
         }
     }
 
+    /**
+     * Sends ConfirmationPacket with confirmation of operation
+     *
+     * @param confirmation
+     */
     public void sendData(boolean confirmation) {
         sendData(new ConfirmationPacket(confirmation, null));
     }
 
+    /**
+     * Sends specific user in LoginResponsePacket obj as a reply to LoginPacket
+     *
+     * @param user
+     */
     public void sendData(User user) {
         if (user instanceof LibUser) {
             sendData(new LoginResponsePacket(user));
         }
     }
 
+    /**
+     * Sends ConfirmationPacket with users to send over
+     * @param usersToSend
+     */
     public void sendData(List<NetUser> usersToSend) {
         if (usersToSend.size() > 0) {
             ArrayList<Object> objUsersToSend = new ArrayList<>();

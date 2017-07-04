@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class used to communicate results of network calls back to client
+ * Class used to results of Book CRUD operations back to client
  */
 public class BookResponseHandler {
 
@@ -28,7 +28,6 @@ public class BookResponseHandler {
 
     /**
      * Replies to client packet by sending ConfirmationPacket to client via ObjectOutputStream
-     * Use case example: send back confirmation if book exists
      *
      * @param packetToSend
      */
@@ -42,7 +41,7 @@ public class BookResponseHandler {
     }
 
     /**
-     * Creates ConfirmationPacket with confirmation to relay to method sendData(ConfirmationPacket)
+     * Sends ConfirmationPacket with confirmation of operation
      *
      * @param confirmation
      */
@@ -50,6 +49,11 @@ public class BookResponseHandler {
         sendData(new ConfirmationPacket(confirmation, null));
     }
 
+    /**
+     * Sends list of books to client by sending LibraryBooksPacket for each book
+     *
+     * @param books
+     */
     public void sendBooks(List<LibraryBook> books) {
         for (LibraryBook libBook : books) {
             sendData(new LibraryBooksPacket(libBook, books.indexOf(libBook), books.size()));
@@ -57,8 +61,7 @@ public class BookResponseHandler {
     }
 
     /**
-     * Creates ConfirmationPacket with Book objects to relay to method sendData(ConfirmationPacket)
-     * Use case example: send back list of books
+     * Sends ConfirmationPacket with Book objects
      *
      * @param booksToSend
      */

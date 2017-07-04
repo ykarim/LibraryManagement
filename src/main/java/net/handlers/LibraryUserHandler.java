@@ -11,19 +11,22 @@ import net.packet.requests.RequestNetUserPacket;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Process CRUD operations for User objects
+ */
 public class LibraryUserHandler {
 
     private UserDAO userDAO;
 
-    /**
-     * Creates handler to deal process getter requests for users
-     */
     public LibraryUserHandler() {
         userDAO = new UserDAO();
     }
 
     /**
+     * Reads information from LibUserPacket to process operation requested
+     *
      * @param packet
+     * @return boolean representing success of operation
      */
     public boolean parseLibUserPacket(LibUserPacket packet) {
         switch (packet.getPacketType()) {
@@ -40,8 +43,10 @@ public class LibraryUserHandler {
     }
 
     /**
+     * Handles get request for specific user(s) by sending over user(s) requested as NetUser objects
+     *
      * @param packet
-     * @return
+     * @return List of LibUsers as NetUser objects requested
      */
     public List<NetUser> parseNetUserPacket(RequestNetUserPacket packet) {
         ArrayList<NetUser> userToReturn = new ArrayList<>();
@@ -63,6 +68,14 @@ public class LibraryUserHandler {
         return null;
     }
 
+    /**
+     * Returns User object if user information in LoginPacket is valid
+     * If information not valid, null User obj is sent
+     * Handles both LibUser and LibAdmin objects
+     *
+     * @param packet
+     * @return User object of authorized user
+     */
     public User parseLoginPacket(LoginPacket packet) {
         return userDAO.loginUser(packet.getUsername(), packet.getPassword());
     }
