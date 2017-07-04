@@ -29,7 +29,7 @@ public class LibServer extends Thread {
      * Accepts connection and creates new LibraryServerThread for each client connected
      * Also adds client's IP address to  (arrList) connectedClients for future use
      */
-    public void runServer() {
+    private void runServer() {
         while (running) {
             try {
                 socket = serverSocket.accept();
@@ -38,6 +38,14 @@ public class LibServer extends Thread {
             } catch (IOException io) {
                 io.printStackTrace();
             }
+        }
+    }
+
+    public void stopServer() {
+        try {
+            serverSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
