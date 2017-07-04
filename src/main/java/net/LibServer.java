@@ -44,6 +44,7 @@ public class LibServer extends Thread {
     public void stopServer() {
         try {
             serverSocket.close();
+            running = false;
         } catch (IOException e) {
             e.printStackTrace();
         }

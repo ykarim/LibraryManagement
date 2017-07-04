@@ -34,7 +34,7 @@ public class LibraryServerThread extends Thread {
      * @param socket
      */
     public LibraryServerThread(Socket socket) {
-        running = true;
+        setRunning(true);
         this.socket = socket;
 
         try {
@@ -70,12 +70,22 @@ public class LibraryServerThread extends Thread {
                     } else if (packet instanceof LoginPacket) {
                         userResponseHandler.sendData(libraryUserHandler.parseLoginPacket((LoginPacket) packet));
                     }
-                } else {
-                    socket.close();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    /**
+     * Closes socket and sets running to false
+     */
+    public void stopSocket() {
+        try {
+            socket.close();
+            running = false;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -84,6 +94,10 @@ public class LibraryServerThread extends Thread {
     }
 
     public void setRunning(boolean running) {
-        this.running = running;
+        if (this.running && !running) { //Going from true to false (on to off)
+            stopSocket();
+        } else { //Going from false to true (off to on)
+            this.running = running;
+        }
     }
 }
