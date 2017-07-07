@@ -130,7 +130,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>view.Main</mainClass>
+                            <mainClass>view.Application</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
