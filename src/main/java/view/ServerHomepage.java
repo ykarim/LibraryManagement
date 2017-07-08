@@ -3,7 +3,7 @@ package view;
 import net.LibServer;
 import util.Constants;
 import view.util.GuiConstants;
-import view.util.GuiUtilities;
+import view.util.IntegerTextField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,16 +13,22 @@ import java.awt.event.ActionListener;
 public class ServerHomepage {
 
     JPanel panel_main;
-    GridBagConstraints bagConstraints;
+    GridBagLayout gridBagLayout;
+    GridBagConstraints gbc;
     JLabel lbl_title, lbl_description;
     JButton btn_serverControl;
+    JLabel lbl_custom_port;
+    IntegerTextField txt_port;
 
     public ServerHomepage() {
-        panel_main = new JPanel(new GridBagLayout());
-        bagConstraints = new GridBagConstraints();
+        gridBagLayout = new GridBagLayout();
+        panel_main = new JPanel(gridBagLayout);
+        gbc = new GridBagConstraints();
         lbl_title = new JLabel();
         lbl_description = new JLabel();
+        lbl_custom_port = new JLabel();
         btn_serverControl = new JButton();
+        txt_port = new IntegerTextField();
 
         setupView();
     }
@@ -30,28 +36,42 @@ public class ServerHomepage {
     public void setupView() {
         setCoordinates(panel_main);
         setTextToComponents();
+        setupTextFields();
         setupHandlers();
     }
 
     public void setCoordinates(JPanel panel) {
-        bagConstraints.gridx = 0;
-        bagConstraints.gridy = 0;
-        bagConstraints.insets = new Insets(10, 0, 10, 0);
-        panel.add(lbl_title, bagConstraints);
+        Insets insets = new Insets(10, 5, 10, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
 
-        bagConstraints.gridx = 0;
-        bagConstraints.gridy = 1;
-        panel.add(lbl_description, bagConstraints);
+        addComponentToPanel(panel, lbl_title, 0, 0, GridBagConstraints.REMAINDER, 2,
+                insets);
 
-        bagConstraints.gridx = 0;
-        bagConstraints.gridy = 2;
-        panel.add(btn_serverControl, bagConstraints);
+        addComponentToPanel(panel, lbl_description, 3, 0, GridBagConstraints.REMAINDER, 1,
+                insets);
+
+        addComponentToPanel(panel, lbl_custom_port, 4, 0, 1, 3, insets);
+
+        addComponentToPanel(panel, txt_port, 4, 2, 1, 3, insets);
+
+        gbc.fill = GridBagConstraints.NONE;
+
+        addComponentToPanel(panel, btn_serverControl, 7, 0, GridBagConstraints.REMAINDER, 2,
+                insets);
     }
 
     public void setTextToComponents() {
         lbl_title.setText(GuiConstants.companyName);
+        lbl_title.setHorizontalAlignment(JLabel.CENTER);
         lbl_description.setText(GuiConstants.programDescription);
+        lbl_description.setHorizontalAlignment(JLabel.CENTER);
         btn_serverControl.setText(GuiConstants.startServerText);
+        lbl_custom_port.setText(GuiConstants.customPortText);
+    }
+
+    public void setupTextFields() {
+        txt_port.setText(String.valueOf(Constants.DEFAULT_PORT));
     }
 
     public void setupHandlers() {
@@ -59,14 +79,31 @@ public class ServerHomepage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!LibServer.getRunning()) {
-                    LibServer.runServer(Constants.DEFAULT_PORT);
+                    if (txt_port.getIntValue() != -1) {
+                        try {
+                            LibServer.runServer(txt_port.getIntValue());
+                            btn_serverControl.setText(GuiConstants.stopServerText);
+                        } catch (IllegalArgumentException iae) {
+
+                        }
+                    }
                 } else {
                     LibServer.stopServer();
+                    btn_serverControl.setText(GuiConstants.startServerText);
                 }
             }
         });
+    }
 
-        GuiUtilities.triggerBtnToSwitchText(btn_serverControl, GuiConstants.startServerText, GuiConstants.stopServerText);
+    public void addComponentToPanel(JPanel panel, Component component, int row, int col, int width, int height,
+                                    Insets insets) {
+        gbc.gridx = col;
+        gbc.gridy = row;
+        gbc.gridwidth = width;
+        gbc.gridheight = height;
+        gbc.insets = insets;
+        gridBagLayout.setConstraints(component, gbc);
+        panel.add(component);
     }
 
 

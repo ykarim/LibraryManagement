@@ -15,4 +15,6 @@ public class GuiConstants {
 
     public static String startServerText = "Start Server";
     public static String stopServerText = "Stop Server";
+
+    public static String customPortText = "Custom Port :";
 }

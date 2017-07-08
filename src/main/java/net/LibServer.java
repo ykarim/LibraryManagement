@@ -1,6 +1,9 @@
 package net;
 
+import log.Logger;
+
 import java.io.IOException;
+import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -25,36 +28,63 @@ public class LibServer extends Thread {
      * Accepts connection and creates new LibraryServerThread for each client connected
      * Also adds client's IP address to  (arrList) connectedClients for future use
      */
-    public static void runServer(int port) {
-        running = true;
+    public static void runServer(int port) throws IllegalArgumentException {
         try {
-            serverSocket = new ServerSocket(port);
+            if (isPortAvailable(port)) {
+                serverSocket = new ServerSocket(port);
+                running = true;
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (running) {
+                            try {
+                                socket = serverSocket.accept();
+                                connectedClients.add(socket.getRemoteSocketAddress().toString());
+                                new LibraryServerThread(socket).start();
+                            } catch (SocketException socketException) {
+                                //Signals that socket is now closed. Can be ignored though will log closing.
+                            } catch (IOException io) {
+                                io.printStackTrace();
+                            }
+                        }
+                    }
+                }).start();
+            } else {
+                IllegalArgumentException illegalArgumentException = new IllegalArgumentException("Port is already in use");
+                Logger.writeException("Port is already in use", illegalArgumentException);
+                throw illegalArgumentException;
+            }
+        } catch (BindException bind) {
+            //Port is already in use
+            Logger.writeException("Port already in use", bind);
+            throw new IllegalArgumentException("Port is already in use");
         } catch (IOException io) {
             io.printStackTrace();
         }
+    }
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (running) {
-                    try {
-                        socket = serverSocket.accept();
-                        connectedClients.add(socket.getRemoteSocketAddress().toString());
-                        new LibraryServerThread(socket).start();
-                    } catch (SocketException socketException) {
-                        //Signals that socket is now closed. Can be ignored though will log closing.
-                    } catch (IOException io) {
-                        io.printStackTrace();
-                    }
-                }
-            }
-        }).start();
+    /**
+     * Checks if given port is available for use by program
+     */
+    private static boolean isPortAvailable(int port) {
+        if (port < 1023 || port > 65535) {
+            return false;
+        }
+
+        try (Socket ignored = new Socket("localhost", port)) {
+            return false;
+        } catch (IOException ignored) {
+            return true;
+        }
     }
 
     public static void stopServer() {
         running = false;
         try {
-            serverSocket.close();
+            if (serverSocket != null) {
+                serverSocket.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

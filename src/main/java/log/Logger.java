@@ -10,4 +10,8 @@ public class Logger {
     public static void writeToLog(Level level, String message) {
         logger.log(level, message);
     }
+
+    public static void writeException(String text, Throwable throwable) {
+        logger.error(text, throwable);
+    }
 }
