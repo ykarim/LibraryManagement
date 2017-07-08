@@ -1,5 +1,6 @@
 package view;
 
+import log.Logger;
 import net.LibServer;
 import util.Constants;
 import view.util.GuiConstants;
@@ -43,7 +44,6 @@ public class ServerHomepage {
     public void setCoordinates(JPanel panel) {
         Insets insets = new Insets(10, 5, 10, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.anchor = GridBagConstraints.CENTER;
 
         addComponentToPanel(panel, lbl_title, 0, 0, GridBagConstraints.REMAINDER, 2,
                 insets);
@@ -71,7 +71,7 @@ public class ServerHomepage {
     }
 
     public void setupTextFields() {
-        txt_port.setText(String.valueOf(Constants.DEFAULT_PORT));
+        txt_port.setText(String.valueOf(Constants.CUSTOM_PORT));
     }
 
     public void setupHandlers() {
@@ -84,7 +84,8 @@ public class ServerHomepage {
                             LibServer.runServer(txt_port.getIntValue());
                             btn_serverControl.setText(GuiConstants.stopServerText);
                         } catch (IllegalArgumentException iae) {
-
+                            Logger.writeException(String.format("Port %d is already in use", txt_port.getIntValue()),
+                                    iae);
                         }
                     }
                 } else {
@@ -102,8 +103,7 @@ public class ServerHomepage {
         gbc.gridwidth = width;
         gbc.gridheight = height;
         gbc.insets = insets;
-        gridBagLayout.setConstraints(component, gbc);
-        panel.add(component);
+        panel.add(component, gbc);
     }
 
 
