@@ -1,5 +1,7 @@
 package view;
 
+import prop.ConstantsStorage;
+import prop.ConstantsUpdater;
 import prop.ServerPropertyStore;
 import view.util.GuiConstants;
 
@@ -33,12 +35,12 @@ public class Application {
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                ServerPropertyStore.savePropertiesToFile();
+                ServerPropertyStore.savePropertiesToFile(new ConstantsStorage());
             }
         });
     }
 
     public static void loadPropertiesIfAvailable() {
-        ServerPropertyStore.loadPropertiesFromFile();
+        ServerPropertyStore.loadPropertiesFromFile(new ConstantsUpdater());
     }
 }
