@@ -77,6 +77,9 @@ public class ServerHomepage {
         lbl_description.setHorizontalAlignment(JLabel.CENTER);
         btn_serverControl.setText(GuiConstants.startServerText);
         lbl_custom_port.setText(GuiConstants.customPortText);
+
+        lbl_title.setFont(new Font(lbl_title.getFont().getName(), Font.BOLD, 36));
+        lbl_description.setFont(new Font(lbl_description.getFont().getName(), Font.PLAIN, 20));
     }
 
     public void setupTextFields() {
