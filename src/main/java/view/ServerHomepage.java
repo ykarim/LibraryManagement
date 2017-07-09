@@ -1,10 +1,12 @@
 package view;
 
+import log.LogStack;
 import log.Logger;
 import net.LibServer;
 import util.Constants;
 import view.util.GuiConstants;
 import view.util.IntegerTextField;
+import view.util.LogTextArea;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +22,8 @@ public class ServerHomepage {
     JButton btn_serverControl;
     JLabel lbl_custom_port;
     IntegerTextField txt_port;
+    JTextArea txtArea_log;
+    JScrollPane scroll_txtArea;
 
     public ServerHomepage() {
         gridBagLayout = new GridBagLayout();
@@ -30,6 +34,8 @@ public class ServerHomepage {
         lbl_custom_port = new JLabel();
         btn_serverControl = new JButton();
         txt_port = new IntegerTextField();
+        txtArea_log = new JTextArea();
+        scroll_txtArea = new JScrollPane(txtArea_log);
 
         setupView();
     }
@@ -38,6 +44,7 @@ public class ServerHomepage {
         setCoordinates(panel_main);
         setTextToComponents();
         setupTextFields();
+        setupTextArea();
         setupHandlers();
     }
 
@@ -56,9 +63,11 @@ public class ServerHomepage {
         addComponentToPanel(panel, txt_port, 4, 2, 1, 3, insets);
 
         gbc.fill = GridBagConstraints.NONE;
-
         addComponentToPanel(panel, btn_serverControl, 7, 0, GridBagConstraints.REMAINDER, 2,
                 insets);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        addComponentToPanel(panel, scroll_txtArea, 9, 0, GridBagConstraints.REMAINDER, 2, insets);
     }
 
     public void setTextToComponents() {
@@ -72,6 +81,12 @@ public class ServerHomepage {
 
     public void setupTextFields() {
         txt_port.setInt(Constants.CUSTOM_PORT);
+    }
+
+    public void setupTextArea() {
+        txtArea_log.setRows(10);
+        txtArea_log.setEditable(false);
+        LogStack.addWatcher(new LogTextArea(txtArea_log));
     }
 
     public void setupHandlers() {
