@@ -19,4 +19,10 @@ public class IntegerTextField extends JTextField {
         }
         return -1;
     }
+
+    public void setInt(int value) {
+        String valueAsString = String.valueOf(value);
+        setText(valueAsString);
+        setCaretPosition(valueAsString.length());
+    }
 }

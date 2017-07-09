@@ -71,7 +71,7 @@ public class ServerHomepage {
     }
 
     public void setupTextFields() {
-        txt_port.setText(String.valueOf(Constants.CUSTOM_PORT));
+        txt_port.setInt(Constants.CUSTOM_PORT);
     }
 
     public void setupHandlers() {
