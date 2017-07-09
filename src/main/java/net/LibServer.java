@@ -51,16 +51,13 @@ public class LibServer extends Thread {
                     }
                 }).start();
             } else {
-                IllegalArgumentException illegalArgumentException = new IllegalArgumentException("Port is already in use");
-                Logger.writeException("Port is already in use", illegalArgumentException);
-                throw illegalArgumentException;
+                throw new IllegalArgumentException(String.format("Port %d is already in use", port));
             }
         } catch (BindException bind) {
             //Port is already in use
-            Logger.writeException("Port already in use", bind);
-            throw new IllegalArgumentException("Port is already in use");
+            throw new IllegalArgumentException(String.format("Port %d is already in use", port));
         } catch (IOException io) {
-            io.printStackTrace();
+            Logger.writeException(null, io);
         }
     }
 
@@ -72,9 +69,9 @@ public class LibServer extends Thread {
             return false;
         }
 
-        try (Socket ignored = new Socket("localhost", port)) {
+        try (Socket test = new Socket("localhost", port)) {
             return false;
-        } catch (IOException ignored) {
+        } catch (IOException io) {
             return true;
         }
     }
@@ -86,7 +83,7 @@ public class LibServer extends Thread {
                 serverSocket.close();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.writeException(null, e);
         }
     }
 }
