@@ -1,6 +1,7 @@
 package net;
 
 import log.Logger;
+import org.apache.logging.log4j.Level;
 
 import java.io.IOException;
 import java.net.BindException;
@@ -41,6 +42,8 @@ public class LibServer extends Thread {
                             try {
                                 socket = serverSocket.accept();
                                 connectedClients.add(socket.getRemoteSocketAddress().toString());
+                                Logger.writeToLog(Level.DEBUG, String.format("%s has connected",
+                                        socket.getRemoteSocketAddress().toString()));
                                 new LibraryServerThread(socket).start();
                             } catch (SocketException socketException) {
                                 //Signals that socket is now closed. Can be ignored though will log closing.

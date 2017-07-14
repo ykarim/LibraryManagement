@@ -1,5 +1,6 @@
 package net;
 
+import log.Logger;
 import net.handlers.BookResponseHandler;
 import net.handlers.LibraryBookHandler;
 import net.handlers.LibraryUserHandler;
@@ -75,7 +76,7 @@ public class LibraryServerThread extends Thread {
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Logger.writeException(null, e);
             }
         }
     }
